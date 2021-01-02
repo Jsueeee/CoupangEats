@@ -7,30 +7,35 @@
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="홈"/>
     <item
         android:id="@+id/menu_main_bottom_search"
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="검색"/>
     <item
         android:id="@+id/menu_main_bottom_bookmark"
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="즐겨찾기"/>
     <item
         android:id="@+id/menu_main_bottom_order"
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="주문내역"/>
     <item
         android:id="@+id/menu_main_bottom_mypage"
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="My 이츠"/>
 
 </menu>
