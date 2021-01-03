@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,9 +36,10 @@
             android:id="@+id/recyclerview_home_menu_category"
             android:layout_width="match_parent"
             android:layout_height="108dp"
-            tools:listitem="@layout/item_home_menu_category"
-
-            app:layout_constraintTop_toBottomOf="@+id/home_top_viewpager" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_top_viewpager"
+            tools:listitem="@layout/item_home_menu_category" />
 
         <View
             android:id="@+id/line_2"
@@ -51,7 +52,9 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
             android:text="인기 프랜차이즈"
             android:textColor="#000"
             android:textSize="15sp"
@@ -77,7 +80,9 @@
             android:id="@+id/famous_restaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
             android:text="골라먹는 맛집"
             android:textColor="#000"
             android:textSize="15sp"
