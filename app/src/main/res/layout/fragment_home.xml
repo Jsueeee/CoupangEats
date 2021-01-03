@@ -23,7 +23,7 @@
             android:id="@+id/line_top"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#919191"
+            android:background="@color/line_gray"
             app:layout_constraintTop_toBottomOf="@+id/top" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -45,7 +45,7 @@
             android:id="@+id/line_2"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#919191"
+            android:background="@color/line_gray"
             app:layout_constraintTop_toBottomOf="@+id/recyclerview_home_menu_category" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:id="@+id/line_3"
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:background="#E3E3E3"
+            android:background="@color/line_gray"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView_Franchise" />
 
         <TextView
