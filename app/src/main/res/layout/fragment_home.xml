@@ -85,14 +85,16 @@
             android:layout_marginEnd="20dp"
             android:text="골라먹는 맛집"
             android:textColor="#000"
-            android:textSize="15sp"
+            android:textSize="14dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_3" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_famous_restaurant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/famous_restaurant" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

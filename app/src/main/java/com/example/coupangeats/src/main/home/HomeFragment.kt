@@ -9,6 +9,7 @@ import com.example.coupangeats.R
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
 import com.example.coupangeats.src.main.home.models.CategoryItem
+import com.example.coupangeats.src.main.home.models.FamRestaurantItem
 import com.example.coupangeats.src.main.home.models.FranchiseItem
 import com.example.coupangeats.src.main.home.models.PageItem
 
@@ -24,6 +25,9 @@ class HomeFragment :
 
     private var franchiseItemList = ArrayList<FranchiseItem>()
     private lateinit var franchiseRecyclerViewAdapter: FranchiseRecyclerViewAdapter
+
+    private var famRestaurantItemList = ArrayList<FamRestaurantItem>()
+    private lateinit var famRestaurantRecyclerViewAdapter: FamRestaurantRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,10 +54,22 @@ class HomeFragment :
         franchiseRecyclerViewAdapter = FranchiseRecyclerViewAdapter()
 
         franchiseItemList.add(FranchiseItem(R.drawable.ic_launcher_background.toString(), "1인분"))
+        franchiseItemList.add(FranchiseItem(R.drawable.ic_launcher_background.toString(), "1인분"))
         franchiseRecyclerViewAdapter.submitList(franchiseItemList)
         binding.recyclerViewFranchise.apply {
             adapter = franchiseRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        }
+
+        famRestaurantRecyclerViewAdapter = FamRestaurantRecyclerViewAdapter()
+
+        famRestaurantItemList.add(FamRestaurantItem(R.drawable.ic_launcher_background.toString(), "1인분"))
+        famRestaurantItemList.add(FamRestaurantItem(R.drawable.ic_launcher_background.toString(), "1인분"))
+        famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
+        binding.recyclerViewFamousRestaurant.apply {
+            adapter = famRestaurantRecyclerViewAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false
+            )
         }
     }
 
