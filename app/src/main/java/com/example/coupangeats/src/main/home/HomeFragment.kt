@@ -3,9 +3,7 @@ package com.example.coupangeats.src.main.home
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -27,10 +25,10 @@ class HomeFragment :
     private var categoryItemList = ArrayList<CategoryItem>()
     private lateinit var categoryRecyclerViewAdapter: CategoryRecyclerViewAdapter
 
-    private var franchiseItemList = ArrayList<FranchiseItem>()
+    private var franchiseList = ArrayList<Franchise>()
     private lateinit var franchiseRecyclerViewAdapter: FranchiseRecyclerViewAdapter
 
-    private var famRestaurantItemList = ArrayList<FamRestaurantItem>()
+    private var famRestaurantItemList = ArrayList<MainStore>()
     private lateinit var famRestaurantRecyclerViewAdapter: FamRestaurantRecyclerViewAdapter
 
     private lateinit var timer: Timer
@@ -58,30 +56,12 @@ class HomeFragment :
         }
 
         franchiseRecyclerViewAdapter = FranchiseRecyclerViewAdapter()
-
-        franchiseItemList.add(FranchiseItem(R.drawable.ic_launcher_background.toString(), "1인분"))
-        franchiseItemList.add(FranchiseItem(R.drawable.ic_launcher_background.toString(), "1인분"))
-        franchiseRecyclerViewAdapter.submitList(franchiseItemList)
         binding.recyclerViewFranchise.apply {
             adapter = franchiseRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
 
         famRestaurantRecyclerViewAdapter = FamRestaurantRecyclerViewAdapter()
-
-        famRestaurantItemList.add(
-            FamRestaurantItem(
-                R.drawable.ic_launcher_background.toString(),
-                "1인분"
-            )
-        )
-        famRestaurantItemList.add(
-            FamRestaurantItem(
-                R.drawable.ic_launcher_background.toString(),
-                "1인분"
-            )
-        )
-        famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
         binding.recyclerViewFamousRestaurant.apply {
             adapter = famRestaurantRecyclerViewAdapter
             layoutManager = LinearLayoutManager(
@@ -89,6 +69,21 @@ class HomeFragment :
             )
         }
 
+        var currentPage = 0
+        val handler = Handler()
+        val Update = Runnable {
+            if (currentPage == 3) {
+                currentPage = 0
+            }
+            binding.homeTopViewpager.setCurrentItem(currentPage++, true)
+        }
+        timer = Timer()
+        timer.schedule(object : TimerTask(){
+            override fun run() {
+                handler.post(Update)
+            }
+
+        }, 500, 3000)
 
     }
 
@@ -131,10 +126,17 @@ class HomeFragment :
         response.result.promotion.forEach {
             promotionList.add(it)
         }
-        Log.d(TAG, "HomeFragment - onGetHomeResultSuccess() : promotion / $promotionList")
+        response.result.franchise.forEach {
+            franchiseList.add(it)
+        }
+        response.result.mainStore.forEach {
+            famRestaurantItemList.add(it)
+        }
 
         topViewPagerAdapter.submitList(promotionList)
-        Log.d(TAG, "HomeFragment - onViewCreated() : submitList - promotion / $promotionList")
+        franchiseRecyclerViewAdapter.submitList(franchiseList)
+        famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
+
 
     }
 

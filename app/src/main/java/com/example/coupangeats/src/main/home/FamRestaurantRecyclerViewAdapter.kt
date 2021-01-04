@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemHomeFamousRestaurantBinding
-import com.example.coupangeats.src.main.home.models.FamRestaurantItem
+import com.example.coupangeats.src.main.home.models.MainStore
 
 class FamRestaurantRecyclerViewAdapter: RecyclerView.Adapter<FamRestaurantViewHolder>() {
 
-    private var famRestaurantItemList = ArrayList<FamRestaurantItem>()
+    private var famRestaurantItemList = ArrayList<MainStore>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FamRestaurantViewHolder {
         return FamRestaurantViewHolder(
@@ -24,8 +24,9 @@ class FamRestaurantRecyclerViewAdapter: RecyclerView.Adapter<FamRestaurantViewHo
         return famRestaurantItemList.size
     }
 
-    fun submitList(famRestaurantItemList: ArrayList<FamRestaurantItem>){
+    fun submitList(famRestaurantItemList: ArrayList<MainStore>){
         this.famRestaurantItemList = famRestaurantItemList
+        notifyDataSetChanged()
     }
 
 }

@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemHomeFranchiseBinding
+import com.example.coupangeats.src.main.home.models.Franchise
 import com.example.coupangeats.src.main.home.models.FranchiseItem
 
 class FranchiseRecyclerViewAdapter : RecyclerView.Adapter<FranchiseViewHolder>() {
 
-    private var franchiseItemList = ArrayList<FranchiseItem>()
+    private var franchiseItemList = ArrayList<Franchise>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FranchiseViewHolder {
         return FranchiseViewHolder(
@@ -24,7 +25,8 @@ class FranchiseRecyclerViewAdapter : RecyclerView.Adapter<FranchiseViewHolder>()
         return franchiseItemList.size
     }
 
-    fun submitList(franchiseItemList: ArrayList<FranchiseItem>) {
+    fun submitList(franchiseItemList: ArrayList<Franchise>) {
         this.franchiseItemList = franchiseItemList
+        notifyDataSetChanged()
     }
 }

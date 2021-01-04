@@ -1,20 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/famous_restaurant_image"
+    <LinearLayout
+        android:id="@+id/famous_restaurant_layout"
         android:layout_width="match_parent"
         android:layout_height="190dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_mainStore_image_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/item_mainStore_image_2"
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:layout_marginBottom="2dp"
+                android:background="#234323"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/item_mainStore_image_3"
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:layout_marginTop="2dp"
+                android:background="#456213"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/famous_restaurant_title"
@@ -27,7 +62,7 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/famous_restaurant_image" />
+        app:layout_constraintTop_toBottomOf="@+id/famous_restaurant_layout" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -41,12 +76,75 @@
         app:layout_constraintTop_toBottomOf="@+id/famous_restaurant_title" />
 
     <TextView
+        android:id="@+id/item_mainStore_storeStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="별점"
+        android:textColor="#3C3C3C"
         android:textSize="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_mainStore_reviewCount"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/famous_restaurant_title" />
+
+    <TextView
+        android:id="@+id/item_mainStore_reviewCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="리뷰수"
+        android:textColor="#3C3C3C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_mainStore_storeStar"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_mainStore_storeStar" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" · "
+        android:textColor="#3C3C3C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_mainStore_reviewCount"
+        app:layout_constraintEnd_toStartOf="@+id/item_mainStore_distance"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_mainStore_reviewCount" />
+
+    <TextView
+        android:id="@+id/item_mainStore_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="거리"
+        android:textColor="#3C3C3C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" · "
+        android:textColor="#3C3C3C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_mainStore_distance"
+        app:layout_constraintEnd_toStartOf="@+id/item_franchise_deliveryFee"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_mainStore_distance" />
+
+    <TextView
+        android:id="@+id/item_mainStore_deliveryFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="배달비"
+        android:textColor="#3C3C3C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
