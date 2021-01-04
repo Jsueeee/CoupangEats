@@ -1,16 +1,12 @@
 package com.example.coupangeats.src.main.home
 
-import android.app.Application
 import android.util.Log
 import com.example.coupangeats.config.ApplicationClass
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
-import com.example.coupangeats.src.main.home.models.HomeResponse
 import com.example.coupangeats.src.main.home.models.HomeResultResponse
-import com.example.coupangeats.src.main.home.models.ResultHome
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
 
 class HomeService(val view: HomeFragmentView) {
 
