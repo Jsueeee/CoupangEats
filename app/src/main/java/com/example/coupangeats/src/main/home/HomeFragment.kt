@@ -1,6 +1,7 @@
 package com.example.coupangeats.src.main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,10 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.R
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
-import com.example.coupangeats.src.main.home.models.CategoryItem
-import com.example.coupangeats.src.main.home.models.FamRestaurantItem
-import com.example.coupangeats.src.main.home.models.FranchiseItem
-import com.example.coupangeats.src.main.home.models.PageItem
+import com.example.coupangeats.src.main.home.models.*
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
@@ -71,6 +69,9 @@ class HomeFragment :
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false
             )
         }
+
+        HomeService(this).getHomeResult()
+
     }
 
     private fun addCategoryItem() {
@@ -102,5 +103,12 @@ class HomeFragment :
 
     override fun onItemClicked(position: Int) {
         showCustomToast("리사이클러뷰 $position 클릭")
+    }
+
+    override fun onGetHomeResultSuccess(response: HomeResultResponse) {
+
+    }
+
+    override fun onGetHomeResultFailure(message: String) {
     }
 }
