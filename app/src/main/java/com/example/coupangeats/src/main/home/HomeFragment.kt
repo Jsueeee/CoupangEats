@@ -56,12 +56,14 @@ class HomeFragment :
         binding.recyclerviewHomeMenuCategory.apply {
             adapter = categoryRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            addItemDecoration(CategoryDecoration())
         }
 
         franchiseRecyclerViewAdapter = FranchiseRecyclerViewAdapter()
         binding.recyclerViewFranchise.apply {
             adapter = franchiseRecyclerViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            addItemDecoration(RecyclerItemDecoration())
         }
 
         famRestaurantRecyclerViewAdapter = FamRestaurantRecyclerViewAdapter()
@@ -70,6 +72,7 @@ class HomeFragment :
             layoutManager = LinearLayoutManager(
                 context, RecyclerView.VERTICAL, false
             )
+            addItemDecoration(MainStoreDecoration())
         }
 
         openStoreRecyclerViewAdapter = OpenStoreRecyclerViewAdapter()
@@ -78,8 +81,8 @@ class HomeFragment :
             layoutManager = LinearLayoutManager(
                 context, RecyclerView.HORIZONTAL, false
             )
+            addItemDecoration(RecyclerItemDecoration())
         }
-
         var currentPage = 0
         val handler = Handler()
         val Update = Runnable {
@@ -89,7 +92,7 @@ class HomeFragment :
             binding.homeTopViewpager.setCurrentItem(currentPage++, true)
         }
         timer = Timer()
-        timer.schedule(object : TimerTask(){
+        timer.schedule(object : TimerTask() {
             override fun run() {
                 handler.post(Update)
             }
