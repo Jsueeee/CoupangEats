@@ -1,6 +1,7 @@
 package com.example.coupangeats.src.main.home
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
 import com.example.coupangeats.src.main.home.models.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
@@ -30,16 +33,7 @@ class HomeFragment :
     private var famRestaurantItemList = ArrayList<FamRestaurantItem>()
     private lateinit var famRestaurantRecyclerViewAdapter: FamRestaurantRecyclerViewAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-
-
-
-    }
+    private lateinit var timer: Timer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,7 +90,6 @@ class HomeFragment :
         }
 
 
-
     }
 
     private fun addCategoryItem() {
@@ -131,7 +124,10 @@ class HomeFragment :
     }
 
     override fun onGetHomeResultSuccess(response: HomeResultResponse) {
-        Log.d(TAG, "HomeFragment - onGetHomeResultSuccess() : response.result.promotion / ${response.result.promotion}")
+        Log.d(
+            TAG,
+            "HomeFragment - onGetHomeResultSuccess() : response.result.promotion / ${response.result.promotion}"
+        )
         response.result.promotion.forEach {
             promotionList.add(it)
         }
@@ -144,4 +140,6 @@ class HomeFragment :
 
     override fun onGetHomeResultFailure(message: String) {
     }
+
+
 }
