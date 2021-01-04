@@ -2,20 +2,23 @@ package com.example.coupangeats.src.main.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.R
+import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
 import com.example.coupangeats.src.main.home.models.*
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    HomeFragmentView, CategoryRecyclerViewInterface {
+    HomeFragmentView, CategoryRecyclerViewInterface, TopViewPagerInterface {
 
-    private var pageItemList = ArrayList<PageItem>()
+    private var promotionList = ArrayList<Promotion>()
     private lateinit var topViewPagerAdapter: TopViewPagerAdapter
 
     private var categoryItemList = ArrayList<CategoryItem>()
@@ -27,18 +30,29 @@ class HomeFragment :
     private var famRestaurantItemList = ArrayList<FamRestaurantItem>()
     private lateinit var famRestaurantRecyclerViewAdapter: FamRestaurantRecyclerViewAdapter
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+
+
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pageItemList.add(PageItem(R.drawable.item_main1.toString()))
-        pageItemList.add(PageItem(R.drawable.item_main2.toString()))
+        HomeService(this).getHomeResult()
 
-        topViewPagerAdapter = TopViewPagerAdapter(pageItemList)
+        topViewPagerAdapter = TopViewPagerAdapter(this)
 
         binding.homeTopViewpager.apply {
             adapter = topViewPagerAdapter
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
+
 
         addCategoryItem()
         categoryRecyclerViewAdapter = CategoryRecyclerViewAdapter(this)
@@ -61,16 +75,27 @@ class HomeFragment :
 
         famRestaurantRecyclerViewAdapter = FamRestaurantRecyclerViewAdapter()
 
-        famRestaurantItemList.add(FamRestaurantItem(R.drawable.ic_launcher_background.toString(), "1인분"))
-        famRestaurantItemList.add(FamRestaurantItem(R.drawable.ic_launcher_background.toString(), "1인분"))
+        famRestaurantItemList.add(
+            FamRestaurantItem(
+                R.drawable.ic_launcher_background.toString(),
+                "1인분"
+            )
+        )
+        famRestaurantItemList.add(
+            FamRestaurantItem(
+                R.drawable.ic_launcher_background.toString(),
+                "1인분"
+            )
+        )
         famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
         binding.recyclerViewFamousRestaurant.apply {
             adapter = famRestaurantRecyclerViewAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false
+            layoutManager = LinearLayoutManager(
+                context, RecyclerView.VERTICAL, false
             )
         }
 
-        HomeService(this).getHomeResult()
+
 
     }
 
@@ -106,6 +131,14 @@ class HomeFragment :
     }
 
     override fun onGetHomeResultSuccess(response: HomeResultResponse) {
+        Log.d(TAG, "HomeFragment - onGetHomeResultSuccess() : response.result.promotion / ${response.result.promotion}")
+        response.result.promotion.forEach {
+            promotionList.add(it)
+        }
+        Log.d(TAG, "HomeFragment - onGetHomeResultSuccess() : promotion / $promotionList")
+
+        topViewPagerAdapter.submitList(promotionList)
+        Log.d(TAG, "HomeFragment - onViewCreated() : submitList - promotion / $promotionList")
 
     }
 
