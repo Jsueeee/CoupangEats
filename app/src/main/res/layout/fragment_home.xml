@@ -137,6 +137,33 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/famous_restaurant" />
+
+        <View
+            android:id="@+id/line_4"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/line_gray"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView_famous_restaurant" />
+
+        <TextView
+            android:id="@+id/openStore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="새로 들어왔어요"
+            android:textColor="#000"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_4" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_openStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/openStore" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

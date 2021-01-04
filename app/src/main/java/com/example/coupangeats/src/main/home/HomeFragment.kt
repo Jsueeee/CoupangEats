@@ -31,6 +31,9 @@ class HomeFragment :
     private var famRestaurantItemList = ArrayList<MainStore>()
     private lateinit var famRestaurantRecyclerViewAdapter: FamRestaurantRecyclerViewAdapter
 
+    private var openStoreItmeList = ArrayList<OpenStore>()
+    private lateinit var openStoreRecyclerViewAdapter: OpenStoreRecyclerViewAdapter
+
     private lateinit var timer: Timer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,6 +69,14 @@ class HomeFragment :
             adapter = famRestaurantRecyclerViewAdapter
             layoutManager = LinearLayoutManager(
                 context, RecyclerView.VERTICAL, false
+            )
+        }
+
+        openStoreRecyclerViewAdapter = OpenStoreRecyclerViewAdapter()
+        binding.recyclerViewOpenStore.apply {
+            adapter = openStoreRecyclerViewAdapter
+            layoutManager = LinearLayoutManager(
+                context, RecyclerView.HORIZONTAL, false
             )
         }
 
@@ -132,12 +143,14 @@ class HomeFragment :
         response.result.mainStore.forEach {
             famRestaurantItemList.add(it)
         }
+        response.result.openStore.forEach {
+            openStoreItmeList.add(it)
+        }
 
         topViewPagerAdapter.submitList(promotionList)
         franchiseRecyclerViewAdapter.submitList(franchiseList)
         famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
-
-
+        openStoreRecyclerViewAdapter.submitList(openStoreItmeList)
     }
 
     override fun onGetHomeResultFailure(message: String) {
