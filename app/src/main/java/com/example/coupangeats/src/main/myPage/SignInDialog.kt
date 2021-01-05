@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Window
 import android.view.WindowManager
+import com.example.coupangeats.R
 import com.example.coupangeats.databinding.SignInDialogBinding
 
 class SignInDialog(context: Context): Dialog(context) {
@@ -28,6 +29,7 @@ class SignInDialog(context: Context): Dialog(context) {
         params.width = ActionBar.LayoutParams.MATCH_PARENT
         params.height = 900
         window!!.attributes = params
+        window!!.attributes.windowAnimations = R.style.DialogAnimation
     }
 
     override fun show() {
