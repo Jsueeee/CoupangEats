@@ -8,6 +8,7 @@ import com.example.coupangeats.databinding.ActivityMainBinding
 import com.example.coupangeats.src.main.bookMark.BookMarkFragment
 import com.example.coupangeats.src.main.home.HomeFragment
 import com.example.coupangeats.src.main.myPage.MyPageFragment
+import com.example.coupangeats.src.main.myPage.SignInDialog
 import com.example.coupangeats.src.main.order.OrderFragment
 import com.example.coupangeats.src.main.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,6 +48,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.menu_main_bottom_mypage -> {
+                        val signInDialog = SignInDialog(this)
+                        signInDialog.show()
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.frame_main, MyPageFragment())
                             .commitAllowingStateLoss()

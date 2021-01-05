@@ -1,4 +1,4 @@
-package com.example.coupangeats.src.main.home
+package com.example.coupangeats.src.main.home.decoration
 
 import android.content.Context
 import android.graphics.Rect
@@ -10,7 +10,7 @@ import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 
-class MainStoreDecoration: RecyclerView.ItemDecoration() {
+class RecyclerItemDecoration: RecyclerView.ItemDecoration() {
     private var size10 = 0
     private var size20 = 0
 
@@ -40,14 +40,14 @@ class MainStoreDecoration: RecyclerView.ItemDecoration() {
 
         when (position) {
             0 -> {
-                outRect.top = size20
+                outRect.left = size20
             }
             itemCount-1 -> {
-                outRect.top = size20
-                outRect.bottom = size20
+                outRect.left = size10
+                outRect.right = size20
             }
             else -> {
-                outRect.top = size20
+                outRect.left = size10
             }
         }
     }

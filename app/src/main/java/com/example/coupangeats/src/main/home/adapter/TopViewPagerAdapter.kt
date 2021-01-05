@@ -1,16 +1,14 @@
-package com.example.coupangeats.src.main.home
+package com.example.coupangeats.src.main.home.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.databinding.ItemHomeTopViewpagerBinding
-import com.example.coupangeats.src.main.home.models.CategoryItem
-import com.example.coupangeats.src.main.home.models.PageItem
+import com.example.coupangeats.src.main.home.itemInterface.TopViewPagerInterface
 import com.example.coupangeats.src.main.home.models.Promotion
-import okhttp3.internal.notify
+import com.example.coupangeats.src.main.home.viewholder.TopViewHolder
 
 class TopViewPagerAdapter(topViewPagerInterface: TopViewPagerInterface): RecyclerView.Adapter<TopViewHolder>() {
 

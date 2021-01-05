@@ -1,4 +1,4 @@
-package com.example.coupangeats.src.main.home
+package com.example.coupangeats.src.main.home.decoration
 
 import android.content.Context
 import android.graphics.Rect

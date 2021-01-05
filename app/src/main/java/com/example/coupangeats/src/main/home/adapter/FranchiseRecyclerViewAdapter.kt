@@ -1,11 +1,11 @@
-package com.example.coupangeats.src.main.home
+package com.example.coupangeats.src.main.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemHomeFranchiseBinding
+import com.example.coupangeats.src.main.home.viewholder.FranchiseViewHolder
 import com.example.coupangeats.src.main.home.models.Franchise
-import com.example.coupangeats.src.main.home.models.FranchiseItem
 
 class FranchiseRecyclerViewAdapter : RecyclerView.Adapter<FranchiseViewHolder>() {
 

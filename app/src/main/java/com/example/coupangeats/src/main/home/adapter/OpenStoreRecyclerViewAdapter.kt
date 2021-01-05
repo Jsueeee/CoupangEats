@@ -1,10 +1,10 @@
-package com.example.coupangeats.src.main.home
+package com.example.coupangeats.src.main.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemHomeOpenstoreBinding
-import com.example.coupangeats.src.main.home.models.Franchise
+import com.example.coupangeats.src.main.home.viewholder.OpenStoreViewHolder
 import com.example.coupangeats.src.main.home.models.OpenStore
 
 class OpenStoreRecyclerViewAdapter: RecyclerView.Adapter<OpenStoreViewHolder>() {

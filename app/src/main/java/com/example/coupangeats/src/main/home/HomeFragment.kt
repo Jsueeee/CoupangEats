@@ -11,6 +11,12 @@ import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
+import com.example.coupangeats.src.main.home.adapter.*
+import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
+import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
+import com.example.coupangeats.src.main.home.decoration.RecyclerItemDecoration
+import com.example.coupangeats.src.main.home.itemInterface.CategoryRecyclerViewInterface
+import com.example.coupangeats.src.main.home.itemInterface.TopViewPagerInterface
 import com.example.coupangeats.src.main.home.models.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -100,22 +106,6 @@ class HomeFragment :
             )
             addItemDecoration(RecyclerItemDecoration())
         }
-//        var currentPage = 0
-//        val handler = Handler()
-//        val Update = Runnable {
-//            if (currentPage == 3) {
-//                currentPage = 0
-//            }
-//            binding.homeTopViewpager.setCurrentItem(currentPage++, true)
-//        }
-//        timer = Timer()
-//        timer.schedule(object : TimerTask() {
-//            override fun run() {
-//                handler.post(Update)
-//            }
-//
-//        }, 500, 3000)
-
     }
 
     override fun onResume() {

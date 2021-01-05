@@ -1,4 +1,4 @@
-package com.example.coupangeats.src.main.home
+package com.example.coupangeats.src.main.home.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemHomeMenuCategoryBinding
