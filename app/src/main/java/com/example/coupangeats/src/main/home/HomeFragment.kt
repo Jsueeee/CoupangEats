@@ -38,6 +38,7 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "HomeFragment - onViewCreated() : ")
 
         HomeService(this).getHomeResult()
 
@@ -46,6 +47,22 @@ class HomeFragment :
         binding.homeTopViewpager.apply {
             adapter = topViewPagerAdapter
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+            var currentPage = 0
+            val handler = Handler()
+            val Update = Runnable {
+                if (currentPage == 3) {
+                    currentPage = 0
+                }
+                setCurrentItem(currentPage++, true)
+            }
+            timer = Timer()
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    handler.post(Update)
+                }
+
+            }, 500, 3000)
         }
 
 
@@ -83,22 +100,32 @@ class HomeFragment :
             )
             addItemDecoration(RecyclerItemDecoration())
         }
-        var currentPage = 0
-        val handler = Handler()
-        val Update = Runnable {
-            if (currentPage == 3) {
-                currentPage = 0
-            }
-            binding.homeTopViewpager.setCurrentItem(currentPage++, true)
-        }
-        timer = Timer()
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(Update)
-            }
+//        var currentPage = 0
+//        val handler = Handler()
+//        val Update = Runnable {
+//            if (currentPage == 3) {
+//                currentPage = 0
+//            }
+//            binding.homeTopViewpager.setCurrentItem(currentPage++, true)
+//        }
+//        timer = Timer()
+//        timer.schedule(object : TimerTask() {
+//            override fun run() {
+//                handler.post(Update)
+//            }
+//
+//        }, 500, 3000)
 
-        }, 500, 3000)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "HomeFragment - onResume() : ")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "HomeFragment - onPause() : ")
     }
 
     private fun addCategoryItem() {
@@ -129,7 +156,6 @@ class HomeFragment :
     }
 
     override fun onItemClicked(position: Int) {
-        showCustomToast("리사이클러뷰 $position 클릭")
     }
 
     override fun onGetHomeResultSuccess(response: HomeResultResponse) {
