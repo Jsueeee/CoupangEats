@@ -168,11 +168,12 @@ class HomeFragment :
 
         topViewPagerAdapter.submitList(promotionList)
         franchiseRecyclerViewAdapter.submitList(franchiseList)
-        famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
+        //famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
         openStoreRecyclerViewAdapter.submitList(openStoreItmeList)
     }
 
     override fun onGetHomeResultFailure(message: String) {
+        showCustomToast("api 호출 실패 $message")
     }
 
 

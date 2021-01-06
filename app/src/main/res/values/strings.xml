@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CoupangEats</string>
-
+    <string name="NATIVE_APP_KEY">fcf7574cec5a55af48a1c34f9b2b0d22</string>
+    <string name="OAUTH_CLIENT_ID">8fQ2xbY9U5mSCF6P71jJ</string>
+    <string name="OAUTH_CLIENT_SECRET">7ESDJuk34Z</string>
+    <string name="OAUTH_CLIENT_NAME">Coupang Eats</string>
 
 </resources>

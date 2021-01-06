@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.menu_main_bottom_mypage -> {
-                        val signInDialog = SignInDialog(this)
+                        val signInDialog = SignInDialog(this, this)
                         signInDialog.show()
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.frame_main, MyPageFragment())

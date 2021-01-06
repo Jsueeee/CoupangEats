@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface HomeRetrofitInterface {
-    @GET("stores")
+    @GET("home")
     fun getHomeResult() : Call<HomeResultResponse>
 }

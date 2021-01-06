@@ -3,7 +3,11 @@ package com.example.coupangeats.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.coupangeats.R
 import com.example.coupangeats.src.main.home.HomeRetrofitInterface
+import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.common.util.Utility
+import com.nhn.android.naverlogin.OAuthLogin
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,7 +36,7 @@ class ApplicationClass : Application() {
         lateinit var sSharedPreferences: SharedPreferences
 
         // JWT Token Header 키 값
-        val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        var X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
@@ -44,6 +48,12 @@ class ApplicationClass : Application() {
 
         instance = this
 
+        KakaoSdk.init(this, "f74621f00e7904ddecabf2154f136096")
+
+
+
+        var keyHash = Utility.getKeyHash(this)
+        Log.d(TAG, "ApplicationClass - onCreate() : keyHash : $keyHash")//IBa8OuH5h6YiDYUjJ/aAMKzOy5c=
 
         sSharedPreferences =
             applicationContext.getSharedPreferences(
