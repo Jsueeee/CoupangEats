@@ -188,6 +188,7 @@
                     android:textSize="16dp" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/myPage_setting"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
                 android:orientation="horizontal">
