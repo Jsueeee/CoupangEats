@@ -23,6 +23,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".src.main.myPage.SettingActivity">
+
+        </activity>
+        <activity android:name=".DetailActivity">
+
+        </activity>
+
         <meta-data android:name="com.kakao.sdk.AppKey"
             android:value="f74621f00e7904ddecabf2154f136096" />
 

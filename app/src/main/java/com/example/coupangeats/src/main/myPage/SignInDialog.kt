@@ -13,13 +13,18 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass
+import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
+import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToken
+import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.coupangeats.databinding.SignInDialogBinding
 import com.example.coupangeats.src.main.MainActivity
 import com.example.coupangeats.src.main.home.HomeFragment
+import com.example.coupangeats.src.main.home.HomeService
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
@@ -28,7 +33,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 class SignInDialog(context: Context, private var activity: Activity) : Dialog(context) {
 
     private lateinit var binding: SignInDialogBinding
-    private var naverAccessToken: String =  ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +51,7 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
         window!!.attributes = params
         window!!.attributes.windowAnimations = R.style.DialogAnimation
 
+        KakaoSdk.init(context, "f74621f00e7904ddecabf2154f136096")
 
         // 로그인 공통 callback 구성
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -53,12 +59,14 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
                 Log.e(TAG, "로그인 실패", error)
             } else if (token != null) {
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                X_ACCESS_TOKEN = token.accessToken
+                KaKaoAccessToken = token.accessToken
+                AccessTokenType = "kakao"
             }
         }
 
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         binding.btnKakaoLogin.setOnClickListener {
+
             if (LoginClient.instance.isKakaoTalkLoginAvailable(context)) {
                 LoginClient.instance.loginWithKakaoTalk(context, callback = callback)
             } else {
@@ -146,7 +154,9 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
                         val expiresAt: Long = mOAuthLoginModule.getExpiresAt(context)
                         val tokenType: String = mOAuthLoginModule.getTokenType(context)
                         Log.d(TAG, "SignInDialog - run() : 네이버 로그인 성공 / $accessToken")
-                        naverAccessToken = accessToken
+                        NaverAccessToken = accessToken
+                        AccessTokenType = "naver"
+                        Log.d(TAG, "SignInDialog - run() : SocialAccessToken / $NaverAccessToken")
                         dismiss()
                     } else {
                         val errorCode: String =
@@ -163,7 +173,7 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
             mOAuthLoginModule.startOauthLoginActivity(activity, mOAuthLoginHandler)
         }
 
-        Log.d(TAG, "SignInDialog - onCreate() : naverAccessToken / $naverAccessToken")
+        Log.d(TAG, "SignInDialog - onCreate() : naverAccessToken / $NaverAccessToken")
     }
 
     override fun dismiss() {

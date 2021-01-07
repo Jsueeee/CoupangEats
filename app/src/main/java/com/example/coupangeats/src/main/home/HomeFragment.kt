@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.R
+import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
+import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToken
+import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
@@ -46,7 +49,16 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "HomeFragment - onViewCreated() : ")
 
+        if (AccessTokenType == "kakao") {
+            HomeService(this).tryPostSignUpKaKao(PostSignUpRequest(KaKaoAccessToken))
+            Log.d(TAG, "HomeFragment - onViewCreated() : 카카오 액세스 토큰 전달 완료 $KaKaoAccessToken")
+        }
+        if (AccessTokenType == "naver") {
+            HomeService(this).tryPostSignUpNaver(PostSignUpRequest(NaverAccessToken))
+            Log.d(TAG, "HomeFragment - onViewCreated() : 네이버 액세스 토큰 전달 완료 $NaverAccessToken")
+        }
         HomeService(this).getHomeResult()
+
 
         topViewPagerAdapter = TopViewPagerAdapter(this)
 
@@ -174,6 +186,14 @@ class HomeFragment :
 
     override fun onGetHomeResultFailure(message: String) {
         showCustomToast("api 호출 실패 $message")
+    }
+
+    override fun onPostSignUpSuccess(response: SignUpResponse) {
+        Log.d(TAG, "HomeFragment - onPostSignUpSuccess() : $response")
+    }
+
+    override fun onPostSignUpFailure(message: String) {
+        Log.d(TAG, "HomeFragment - onPostSignUpFailure() : $message")
     }
 
 

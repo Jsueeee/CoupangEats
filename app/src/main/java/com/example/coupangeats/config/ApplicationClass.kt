@@ -38,6 +38,11 @@ class ApplicationClass : Application() {
         // JWT Token Header 키 값
         var X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
 
+        var AccessTokenType = ""
+
+        var KaKaoAccessToken: String = ""
+        var NaverAccessToken: String = ""
+
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
     }
@@ -47,9 +52,6 @@ class ApplicationClass : Application() {
         super.onCreate()
 
         instance = this
-
-        KakaoSdk.init(this, "f74621f00e7904ddecabf2154f136096")
-
 
 
         var keyHash = Utility.getKeyHash(this)
