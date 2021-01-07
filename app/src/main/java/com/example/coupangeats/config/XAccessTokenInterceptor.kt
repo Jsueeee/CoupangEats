@@ -1,5 +1,7 @@
 package com.example.coupangeats.config
 
+import android.util.Log
+import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.coupangeats.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor
@@ -16,6 +18,7 @@ class XAccessTokenInterceptor : Interceptor {
         val jwtToken: String? = sSharedPreferences.getString(X_ACCESS_TOKEN, null)
         if (jwtToken != null) {
             builder.addHeader("X-ACCESS-TOKEN", jwtToken)
+            Log.d(TAG, "TOKEN : $jwtToken")
         }
         return chain.proceed(builder.build())
     }

@@ -78,6 +78,7 @@ class ApplicationClass : Application() {
                     message
                 )
             }.setLevel(HttpLoggingInterceptor.Level.BODY)) // API Response 로그 작성용
+            .addNetworkInterceptor(XAccessTokenInterceptor())
             .build()
 
         // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드

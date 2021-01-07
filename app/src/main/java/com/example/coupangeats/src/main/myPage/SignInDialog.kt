@@ -28,6 +28,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 class SignInDialog(context: Context, private var activity: Activity) : Dialog(context) {
 
     private lateinit var binding: SignInDialogBinding
+    private var naverAccessToken: String =  ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,7 +146,7 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
                         val expiresAt: Long = mOAuthLoginModule.getExpiresAt(context)
                         val tokenType: String = mOAuthLoginModule.getTokenType(context)
                         Log.d(TAG, "SignInDialog - run() : 네이버 로그인 성공 / $accessToken")
-                        X_ACCESS_TOKEN = accessToken
+                        naverAccessToken = accessToken
                         dismiss()
                     } else {
                         val errorCode: String =
@@ -162,6 +163,7 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
             mOAuthLoginModule.startOauthLoginActivity(activity, mOAuthLoginHandler)
         }
 
+        Log.d(TAG, "SignInDialog - onCreate() : naverAccessToken / $naverAccessToken")
     }
 
     override fun dismiss() {
