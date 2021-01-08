@@ -1,4 +1,4 @@
-package com.example.coupangeats.src.main.address
+package com.example.coupangeats.src.main.address.map
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,9 @@ import androidx.core.app.ActivityCompat
 import com.example.coupangeats.R
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityMapBinding
+import com.example.coupangeats.src.main.address.mapDetail.MapDetailActivity
 import com.example.coupangeats.src.main.address.models.ReverseGeocodingResult
+import com.example.coupangeats.src.main.address.models.SettingAddressResult
 import com.example.coupangeats.src.main.home.HomeService
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
@@ -114,7 +116,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>(ActivityMapBinding::inflate
 
             val coords = ("$longitude,$latitude") //경도,위도 순
             Log.d(TAG, "MapActivity - onMapReady() : 위경도 : $coords")
-            MapService(this, coords).getReverseGeocodingResult()
+            MapService(this).getReverseGeocodingResult(coords)
         }
 
 
@@ -147,4 +149,5 @@ class MapActivity : BaseActivity<ActivityMapBinding>(ActivityMapBinding::inflate
     override fun onGetReverseGeocodingFailure(message: String) {
         Log.d(TAG, "MapActivity - onGetReverseGeocodingFailure() : ")
     }
+
 }

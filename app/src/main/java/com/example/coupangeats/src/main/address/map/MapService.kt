@@ -1,15 +1,16 @@
-package com.example.coupangeats.src.main.address
+package com.example.coupangeats.src.main.address.map
 
 import android.util.Log
 import com.example.coupangeats.config.ApplicationClass
+import com.example.coupangeats.src.main.address.MapRetrofitInterface
 import com.example.coupangeats.src.main.address.models.ReverseGeocodingResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapService(val view: MapActivityView, val coords: String) {
+class MapService(val view: MapActivityView) {
 
-    fun getReverseGeocodingResult(){
+    fun getReverseGeocodingResult(coords: String){
         val mapRetrofitInterface = ApplicationClass.naverRetrofit.create(MapRetrofitInterface::class.java)
 
         Log.d(TAG, "MapService - getReverseGeocodingResult() : 위경도 : $coords")
@@ -31,4 +32,5 @@ class MapService(val view: MapActivityView, val coords: String) {
 
         })
     }
+
 }
