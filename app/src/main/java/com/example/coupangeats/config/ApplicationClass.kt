@@ -25,6 +25,8 @@ class ApplicationClass : Application() {
     // 실 서버 주소
     // val API_URL = "http://api.test.com/"
 
+    val NAVER_MAP_API_URL = "https://naveropenapi.apigw.ntruss.com/"
+
     // 코틀린의 전역변수 문법
     companion object {
         const val TAG = "LOG"
@@ -45,6 +47,8 @@ class ApplicationClass : Application() {
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
+
+        lateinit var naverRetrofit: Retrofit
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.
@@ -65,6 +69,30 @@ class ApplicationClass : Application() {
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
 
+        initNaverRetrofitInstance()
+
+    }
+
+    private fun initNaverRetrofitInstance() {
+        val client: OkHttpClient = OkHttpClient.Builder()
+            .readTimeout(5000, TimeUnit.MILLISECONDS)
+            .connectTimeout(5000, TimeUnit.MILLISECONDS)
+            .addInterceptor(HttpLoggingInterceptor { message: String ->
+                Log.d(
+                    "network_info",
+                    message
+                )
+            }.setLevel(HttpLoggingInterceptor.Level.BODY)) // API Response 로그 작성용
+            .addNetworkInterceptor(XAccessTokenInterceptor())
+            .build()
+
+        // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
+        // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
+        naverRetrofit = Retrofit.Builder()
+            .baseUrl(NAVER_MAP_API_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
 

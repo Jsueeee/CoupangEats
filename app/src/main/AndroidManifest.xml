@@ -4,6 +4,7 @@
     package="com.example.coupangeats">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
     <application
@@ -16,13 +17,12 @@
         android:theme="@style/Theme.CoupangEats"
         tools:ignore="ExtraText">
         <activity android:name=".src.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
+        <activity android:name=".src.main.address.MapActivity">
+
+        </activity>
         <activity android:name=".src.main.myPage.SettingActivity">
 
         </activity>
@@ -30,18 +30,36 @@
 
         </activity>
 
-        <meta-data android:name="com.kakao.sdk.AppKey"
+        <activity android:name=".src.main.address.MapDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
             android:value="f74621f00e7904ddecabf2154f136096" />
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="oauth"
+
+                <data
+                    android:host="oauth"
                     android:scheme="kakaof74621f00e7904ddecabf2154f136096" />
             </intent-filter>
         </activity>
+
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="h3b5sixohz" />
 
     </application>
 
