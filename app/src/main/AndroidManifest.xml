@@ -20,7 +20,11 @@
 
         </activity>
 
-        <activity android:name=".src.main.address.MapActivity">
+        <activity android:name=".src.main.address.map.MapActivity">
+
+        </activity>
+
+        <activity android:name=".src.main.address.mapSearch.MapSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
