@@ -49,7 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
+            android:inputType="text"
             android:textSize="15dp"
+            android:focusableInTouchMode="true"
             android:hint="도로명, 건물명 또는 지번으로 검색"/>
     </LinearLayout>
 

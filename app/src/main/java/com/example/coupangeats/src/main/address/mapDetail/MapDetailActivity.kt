@@ -26,7 +26,10 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
         buildingName = intent.getStringExtra("buildingName").toString()
         addressDetail = intent.getStringExtra("addressDetail").toString()
 
-        Log.d(TAG, "MapDetailActivity - onCreate() : $latitude / $longitude / $address / $buildingName / $addressDetail")
+        Log.d(
+            TAG,
+            "MapDetailActivity - onCreate() : $latitude / $longitude / $address / $buildingName / $addressDetail"
+        )
 
 
         binding.mapDetailTxtTitle.text = buildingName
@@ -36,7 +39,19 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
             addressDetail = binding.etAddressDetail.text.toString() //상세주소 저장
 
             // 서버에 전송
-            val addressInfoRequest = AddressInfoRequest(latitude, longitude, address, buildingName, addressDetail)
+
+            // 개발 단계 사용 x
+            //val addressInfoRequest = AddressInfoRequest(latitude, longitude, address, buildingName, addressDetail)
+
+            // 개발 단계 임시 주소 사용
+            val addressInfoRequest =
+                AddressInfoRequest(
+                    37.336195,
+                    126.863623,
+                    "경기 안산시 상록구 정재로 127",
+                    "우진아트빌",
+                    "123호"
+                )
             MapDetailService(this).patchAddressInfoRequest(addressInfoRequest)
 
             // 홈프래그먼트로 이동

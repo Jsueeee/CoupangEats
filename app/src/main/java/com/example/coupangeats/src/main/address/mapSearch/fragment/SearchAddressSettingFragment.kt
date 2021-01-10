@@ -1,11 +1,10 @@
-package com.example.coupangeats.src.main.address.mapSearch
+package com.example.coupangeats.src.main.address.mapSearch.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.coupangeats.R
 import com.example.coupangeats.config.BaseFragment
-import com.example.coupangeats.databinding.FragmentSearchAddressBinding
 import com.example.coupangeats.databinding.FragmentSearchAddressSettingBinding
 import com.example.coupangeats.src.main.address.map.MapActivity
 

@@ -18,7 +18,10 @@ interface MapRetrofitInterface {
     ): Call<ReverseGeocodingResult>
 
     @PATCH("/address")
-    fun patchAddressInfo(@Body params: AddressInfoRequest): Call<SettingAddressResult>
+    fun patchAddressInfo(
+//        @Header("X-ACCESS-TOKEN") jwt: String,
+        @Body params: AddressInfoRequest
+    ): Call<SettingAddressResult>
 
     @GET("keyword.json")
     fun getSearchAddress(

@@ -5,7 +5,7 @@ data class MainStore(
     val deliveryFee: String,
     val deliveryTime: String,
     val distance: String,
-    val img_arr: List<String>,
+    val img: List<String>,
     val reviewCount: Int,
     val storeIdx: Int,
     val storeName: String,

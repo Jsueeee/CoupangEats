@@ -61,7 +61,6 @@ class ApplicationClass : Application() {
 
 
         var keyHash = Utility.getKeyHash(this)
-        Log.d(TAG, "ApplicationClass - onCreate() : keyHash : $keyHash")//IBa8OuH5h6YiDYUjJ/aAMKzOy5c=
 
         sSharedPreferences =
             applicationContext.getSharedPreferences(

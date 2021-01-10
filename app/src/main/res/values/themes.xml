@@ -19,4 +19,9 @@
         <item name="android:windowEnterAnimation">@anim/translate_up</item>
         <item name="android:windowExitAnimation">@anim/translate_down</item>
     </style>
+
+    <style name="NoStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
 </resources>

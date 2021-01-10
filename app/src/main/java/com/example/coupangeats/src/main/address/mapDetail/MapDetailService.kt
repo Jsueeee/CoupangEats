@@ -2,6 +2,7 @@ package com.example.coupangeats.src.main.address.mapDetail
 
 import android.util.Log
 import com.example.coupangeats.config.ApplicationClass
+import com.example.coupangeats.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.coupangeats.src.main.address.MapRetrofitInterface
 import com.example.coupangeats.src.main.address.models.AddressInfoRequest
 import com.example.coupangeats.src.main.address.models.SettingAddressResult
