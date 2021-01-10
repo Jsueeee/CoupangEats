@@ -1,5 +1,6 @@
 package com.example.coupangeats.src.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -12,21 +13,25 @@ import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
 import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
+import com.example.coupangeats.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
+import com.example.coupangeats.src.main.address.map.MapActivity
 import com.example.coupangeats.src.main.home.adapter.*
 import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
 import com.example.coupangeats.src.main.home.decoration.RecyclerItemDecoration
 import com.example.coupangeats.src.main.home.itemInterface.CategoryRecyclerViewInterface
+import com.example.coupangeats.src.main.home.itemInterface.FamRestaurantRecyclerViewInterface
 import com.example.coupangeats.src.main.home.itemInterface.TopViewPagerInterface
 import com.example.coupangeats.src.main.home.models.*
+import com.example.coupangeats.src.main.storeInfo.StoreInfoActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    HomeFragmentView, CategoryRecyclerViewInterface, TopViewPagerInterface {
+    HomeFragmentView, CategoryRecyclerViewInterface, TopViewPagerInterface, FamRestaurantRecyclerViewInterface {
 
     private var promotionList = ArrayList<Promotion>()
     private lateinit var topViewPagerAdapter: TopViewPagerAdapter
@@ -58,6 +63,11 @@ class HomeFragment :
             Log.d(TAG, "HomeFragment - onViewCreated() : 네이버 액세스 토큰 전달 완료 $NaverAccessToken")
         }
         HomeService(this).getHomeResult()
+
+        binding.textView3.setOnClickListener {
+            val intent = Intent(context, MapActivity::class.java)
+            startActivity(intent)
+        }
 
 
         topViewPagerAdapter = TopViewPagerAdapter(this)
@@ -101,7 +111,7 @@ class HomeFragment :
             addItemDecoration(RecyclerItemDecoration())
         }
 
-        famRestaurantRecyclerViewAdapter = FamRestaurantRecyclerViewAdapter()
+        famRestaurantRecyclerViewAdapter = FamRestaurantRecyclerViewAdapter(this)
         binding.recyclerViewFamousRestaurant.apply {
             adapter = famRestaurantRecyclerViewAdapter
             layoutManager = LinearLayoutManager(
@@ -161,27 +171,33 @@ class HomeFragment :
     }
 
     override fun onGetHomeResultSuccess(response: HomeResultResponse) {
-        Log.d(
-            TAG,
-            "HomeFragment - onGetHomeResultSuccess() : response.result.promotion / ${response.result.promotion}"
-        )
-        response.result.promotion.forEach {
-            promotionList.add(it)
-        }
-        response.result.franchise.forEach {
-            franchiseList.add(it)
-        }
-        response.result.mainStore.forEach {
-            famRestaurantItemList.add(it)
-        }
-        response.result.openStore.forEach {
-            openStoreItmeList.add(it)
+
+        if(response.result == null){
+            Log.d(TAG, "HomeFragment - onGetHomeResultSuccess() : result is null")
+        }else{
+            Log.d(
+                TAG,
+                "HomeFragment - onGetHomeResultSuccess() : response.result.promotion / ${response.result.promotion}"
+            )
+            response.result.promotion.forEach {
+                promotionList.add(it)
+            }
+            response.result.franchise.forEach {
+                franchiseList.add(it)
+            }
+            response.result.mainStore.forEach {
+                famRestaurantItemList.add(it)
+            }
+            response.result.openStore.forEach {
+                openStoreItmeList.add(it)
+            }
+
+            topViewPagerAdapter.submitList(promotionList)
+            franchiseRecyclerViewAdapter.submitList(franchiseList)
+            famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
+            openStoreRecyclerViewAdapter.submitList(openStoreItmeList)
         }
 
-        topViewPagerAdapter.submitList(promotionList)
-        franchiseRecyclerViewAdapter.submitList(franchiseList)
-        //famRestaurantRecyclerViewAdapter.submitList(famRestaurantItemList)
-        openStoreRecyclerViewAdapter.submitList(openStoreItmeList)
     }
 
     override fun onGetHomeResultFailure(message: String) {
@@ -190,10 +206,18 @@ class HomeFragment :
 
     override fun onPostSignUpSuccess(response: SignUpResponse) {
         Log.d(TAG, "HomeFragment - onPostSignUpSuccess() : $response")
+
     }
 
     override fun onPostSignUpFailure(message: String) {
         Log.d(TAG, "HomeFragment - onPostSignUpFailure() : $message")
+    }
+
+    override fun onFamRestaurantItemClicked(storeIdx: Int) {
+        showCustomToast("아이템 클릭 $storeIdx")
+        val intent = Intent(context, StoreInfoActivity::class.java)
+        intent.putExtra("storeIdx", storeIdx)
+        startActivity(intent)
     }
 
 

@@ -17,19 +17,23 @@
         android:theme="@style/Theme.CoupangEats"
         tools:ignore="ExtraText">
         <activity android:name=".src.main.MainActivity">
-
-        </activity>
-
-        <activity android:name=".src.main.address.map.MapActivity">
-
-        </activity>
-
-        <activity android:name=".src.main.address.mapSearch.MapSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".src.main.storeInfo.StoreInfoActivity"
+            android:theme="@style/NoStatusBar">
+
+        </activity>
+        <activity android:name=".src.main.address.map.MapActivity">
+
+        </activity>
+
+        <activity android:name=".src.main.address.mapSearch.MapSearchActivity">
+
         </activity>
         <activity android:name=".src.main.myPage.SettingActivity">
 
