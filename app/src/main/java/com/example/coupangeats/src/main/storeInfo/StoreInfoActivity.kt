@@ -12,6 +12,7 @@ import com.example.coupangeats.src.main.storeInfo.adapter.StoreViewPagerAdapter
 import com.example.coupangeats.src.main.storeInfo.menu.MenuCategoryRecyclerViewAdapter
 import com.example.coupangeats.src.main.storeInfo.models.CategoryMenu
 import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
+import com.google.android.material.tabs.TabLayout
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,8 +27,12 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     private var categoryMenuList = ArrayList<CategoryMenu>()
     private lateinit var menuCategoryRecyclerViewAdapter: MenuCategoryRecyclerViewAdapter
 
+    var tabName = ArrayList<String>()
+    lateinit var tab: TabLayout.Tab
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         val toolbar = binding.toolbar
 
@@ -91,19 +96,35 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
+
     }
 
 
     override fun onGetStoreInfoSuccess(response: StoreInfoResult) {
         Log.d(TAG, "StoreInfoActivity - onGetStoreInfoSuccess() : ${response}")
         storeViewPagerAdapter.submitList(response.storePhoto)
+        binding.storeName.text = response.storeInfo[0].storeName
+
+        response.storeInfo.forEach {
+            binding.storeName.text = it.storeName
+            binding.storeStar.text = it.storeStar.toString()
+            binding.deliveryTime.text = it.deliveryTime
+            binding.deliveryFee.text = it.deliveryFee
+            binding.minOrderCost.text = it.minOrderCost
+            binding.reviewCount.text = "리뷰 ${it.reviewCount}개"
+        }
 
         Log.d(TAG, "StoreInfoActivity - onGetStoreInfoSuccess() : response.categoryMenu : ${response.categoryMenu}")
 
         response.categoryMenu.forEach {
             categoryMenuList.add(it)
+            tabName.add(it.categoryName)
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(it.categoryName))
         }
         menuCategoryRecyclerViewAdapter.submitList(categoryMenuList)
+
+
+
 
     }
 
