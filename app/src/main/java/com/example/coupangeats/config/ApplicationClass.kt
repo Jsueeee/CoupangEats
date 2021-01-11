@@ -51,6 +51,10 @@ class ApplicationClass : Application() {
 
         lateinit var naverRetrofit: Retrofit
         lateinit var kakaoRetrofit: Retrofit
+
+        //유저네임, 번호, 이메일
+         var userName: String = ""
+        var userNumberOrEmail: String = ""
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.

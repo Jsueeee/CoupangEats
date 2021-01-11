@@ -18,6 +18,8 @@ import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToke
 import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.config.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.example.coupangeats.config.ApplicationClass.Companion.userName
+import com.example.coupangeats.config.ApplicationClass.Companion.userNumberOrEmail
 import com.example.coupangeats.databinding.SignInDialogBinding
 import com.example.coupangeats.src.main.MainActivity
 import com.example.coupangeats.src.main.home.HomeFragment
@@ -33,6 +35,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 class SignInDialog(context: Context, private var activity: Activity) : Dialog(context) {
 
     private lateinit var binding: SignInDialogBinding
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,6 +102,8 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
                             "\n전화번호: ${user.kakaoAccount?.phoneNumber}" +
                             "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
                 )
+                userName = user.kakaoAccount?.profile?.nickname.toString()
+                userNumberOrEmail = user.kakaoAccount?.email.toString()
             }
         }
 

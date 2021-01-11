@@ -5,4 +5,6 @@
     <string name="OAUTH_CLIENT_SECRET">7ESDJuk34Z</string>
     <string name="OAUTH_CLIENT_NAME">Coupang Eats</string>
 
+    <string name="toolbar_title">치킨치킨먹고싶다</string>
+
 </resources>

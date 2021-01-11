@@ -21,7 +21,16 @@
     </style>
 
     <style name="NoStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+<!-- Toolbar -->
+<!--        <item name="toolbarStyle">@style/ToolbarStyle.Light</item>-->
     </style>
+
+    <style name="ToolbarStyle.Light" parent="Widget.AppCompat.Toolbar">
+        <item name="background">@color/white</item>
+        <item name="android:title">@string/toolbar_title</item>
+        <item name="titleTextColor">#000</item>
+    </style>
+
 </resources>
