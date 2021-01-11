@@ -3,15 +3,21 @@ package com.example.coupangeats.src.main.storeInfo
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityStoreInfoBinding
-import com.example.coupangeats.src.main.storeInfo.adapter.StoreViewPagerAdapter
+import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
+import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
+import com.example.coupangeats.src.main.storeInfo.viewpager.StoreViewPagerAdapter
 import com.example.coupangeats.src.main.storeInfo.menu.MenuCategoryRecyclerViewAdapter
 import com.example.coupangeats.src.main.storeInfo.models.CategoryMenu
+import com.example.coupangeats.src.main.storeInfo.models.PhotoReview
 import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
+import com.example.coupangeats.src.main.storeInfo.review.ReviewDecoration
+import com.example.coupangeats.src.main.storeInfo.review.ReviewRecyclerViewAdapter
 import com.google.android.material.tabs.TabLayout
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,6 +32,10 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
     private var categoryMenuList = ArrayList<CategoryMenu>()
     private lateinit var menuCategoryRecyclerViewAdapter: MenuCategoryRecyclerViewAdapter
+
+    private var photoReviewList = ArrayList<PhotoReview>()
+    private lateinit var reviewRecyclerViewAdapter: ReviewRecyclerViewAdapter
+
 
     var tabName = ArrayList<String>()
     lateinit var tab: TabLayout.Tab
@@ -96,6 +106,12 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
+        reviewRecyclerViewAdapter = ReviewRecyclerViewAdapter()
+        binding.recyclerViewReview.apply {
+            adapter = reviewRecyclerViewAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            addItemDecoration(ReviewDecoration())
+        }
 
     }
 
@@ -105,6 +121,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
         storeViewPagerAdapter.submitList(response.storePhoto)
         binding.storeName.text = response.storeInfo[0].storeName
 
+
         response.storeInfo.forEach {
             binding.storeName.text = it.storeName
             binding.storeStar.text = it.storeStar.toString()
@@ -112,6 +129,9 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             binding.deliveryFee.text = it.deliveryFee
             binding.minOrderCost.text = it.minOrderCost
             binding.reviewCount.text = "리뷰 ${it.reviewCount}개"
+            if(it.isCheetah == "N"){
+                binding.isCheetah.visibility = View.INVISIBLE
+            }
         }
 
         Log.d(TAG, "StoreInfoActivity - onGetStoreInfoSuccess() : response.categoryMenu : ${response.categoryMenu}")
@@ -124,7 +144,10 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
         menuCategoryRecyclerViewAdapter.submitList(categoryMenuList)
 
 
-
+        response.photoReview.forEach {
+            photoReviewList.add(it)
+        }
+        reviewRecyclerViewAdapter.submitList(photoReviewList)
 
     }
 

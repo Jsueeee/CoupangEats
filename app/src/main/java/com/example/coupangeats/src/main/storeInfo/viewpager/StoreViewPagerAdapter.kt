@@ -1,10 +1,9 @@
-package com.example.coupangeats.src.main.storeInfo.adapter
+package com.example.coupangeats.src.main.storeInfo.viewpager
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemStoreViewpagerBinding
-import com.example.coupangeats.src.main.storeInfo.viewholder.StoreViewHolder
 
 class StoreViewPagerAdapter(): RecyclerView.Adapter<StoreViewHolder>() {
 

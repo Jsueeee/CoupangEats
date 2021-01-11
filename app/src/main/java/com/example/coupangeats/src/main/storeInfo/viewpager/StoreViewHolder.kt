@@ -1,4 +1,4 @@
-package com.example.coupangeats.src.main.storeInfo.viewholder
+package com.example.coupangeats.src.main.storeInfo.viewpager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
