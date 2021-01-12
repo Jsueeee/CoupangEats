@@ -23,7 +23,7 @@ class SearchAddressKeywordFragment(searchResult: ArrayList<SearchRecyclerViewRes
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchAddressRecyclerviewAdapter = SearchAddressRecyclerviewAdapter()
+        searchAddressRecyclerviewAdapter = SearchAddressRecyclerviewAdapter(context!!)
         binding.recyclerViewSearchAddress.apply {
             adapter = searchAddressRecyclerviewAdapter
             layoutManager = LinearLayoutManager(

@@ -3,10 +3,13 @@ package com.example.coupangeats.src.main.storeInfo
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.coupangeats.R
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityStoreInfoBinding
 import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
@@ -14,6 +17,7 @@ import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
 import com.example.coupangeats.src.main.storeInfo.viewpager.StoreViewPagerAdapter
 import com.example.coupangeats.src.main.storeInfo.menu.MenuCategoryRecyclerViewAdapter
 import com.example.coupangeats.src.main.storeInfo.models.CategoryMenu
+import com.example.coupangeats.src.main.storeInfo.models.HeartStoreResult
 import com.example.coupangeats.src.main.storeInfo.models.PhotoReview
 import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
 import com.example.coupangeats.src.main.storeInfo.review.ReviewDecoration
@@ -36,6 +40,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     private var photoReviewList = ArrayList<PhotoReview>()
     private lateinit var reviewRecyclerViewAdapter: ReviewRecyclerViewAdapter
 
+    private var storeIdx = 0
 
     var tabName = ArrayList<String>()
     lateinit var tab: TabLayout.Tab
@@ -72,7 +77,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 //
 //        })
 
-        val storeIdx = intent.getIntExtra("storeIdx", 0)
+        storeIdx = intent.getIntExtra("storeIdx", 0)
 
         StoreService(this).getStoreInfo(storeIdx)
 
@@ -115,6 +120,18 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.menu_store_info, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.btn_heart -> StoreService(this).postStoreHeart(storeIdx)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onGetStoreInfoSuccess(response: StoreInfoResult) {
         Log.d(TAG, "StoreInfoActivity - onGetStoreInfoSuccess() : ${response}")
@@ -152,6 +169,14 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     }
 
     override fun onGetStoreInfoFailure(message: String) {
+
+    }
+
+    override fun onPostHeartSuccess(response: HeartStoreResult) {
+
+    }
+
+    override fun onPostHeartFailure(message: String) {
 
     }
 }
