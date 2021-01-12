@@ -1,9 +1,12 @@
 package com.example.coupangeats.src.main.address.mapDetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityMapDetailBinding
+import com.example.coupangeats.src.main.MainActivity
+import com.example.coupangeats.src.main.address.map.MapActivity
 import com.example.coupangeats.src.main.address.models.AddressInfoRequest
 import com.example.coupangeats.src.main.address.models.SettingAddressResult
 
@@ -35,6 +38,11 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
         binding.mapDetailTxtTitle.text = buildingName
         binding.mapDetailTxtSubtitle.text = address
 
+        binding.btnMap.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnAddressComplete.setOnClickListener {
             addressDetail = binding.etAddressDetail.text.toString() //상세주소 저장
 
@@ -56,6 +64,10 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
 
             // 홈프래그먼트로 이동
             // "배달주소가 변경되었습니다" 다이얼로그
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

@@ -27,6 +27,7 @@ class ApplicationClass : Application() {
 
     val NAVER_MAP_API_URL = "https://naveropenapi.apigw.ntruss.com/"
     val KAKAO_MAP_API_URL = "https://dapi.kakao.com/v2/local/search/"
+    val NAVER_USER_API_URL = "https://openapi.naver.com/v1/"
 
     // 코틀린의 전역변수 문법
     companion object {
@@ -51,6 +52,7 @@ class ApplicationClass : Application() {
 
         lateinit var naverRetrofit: Retrofit
         lateinit var kakaoRetrofit: Retrofit
+        lateinit var naverUserRetrofit: Retrofit
 
         //유저네임, 번호, 이메일
          var userName: String = ""
@@ -76,6 +78,7 @@ class ApplicationClass : Application() {
 
         initNaverRetrofitInstance()
         initKaKaoRetrofitInstance()
+        initNaverUserRetrofitInstance()
 
     }
 
@@ -143,6 +146,28 @@ class ApplicationClass : Application() {
         // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
         sRetrofit = Retrofit.Builder()
             .baseUrl(API_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun initNaverUserRetrofitInstance() {
+        val client: OkHttpClient = OkHttpClient.Builder()
+            .readTimeout(5000, TimeUnit.MILLISECONDS)
+            .connectTimeout(5000, TimeUnit.MILLISECONDS)
+            .addInterceptor(HttpLoggingInterceptor { message: String ->
+                Log.d(
+                    "network_info",
+                    message
+                )
+            }.setLevel(HttpLoggingInterceptor.Level.BODY)) // API Response 로그 작성용
+            .addNetworkInterceptor(XAccessTokenInterceptor())
+            .build()
+
+        // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
+        // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
+        naverUserRetrofit = Retrofit.Builder()
+            .baseUrl(NAVER_USER_API_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

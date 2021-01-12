@@ -85,7 +85,8 @@ class MapSearchActivity : BaseActivity<ActivityMapSearchBinding>(ActivityMapSear
             searchResultItemList.add(
                 SearchRecyclerViewResult(
                     addressName = it.addressName,
-                    roadAddressName = it.roadAddressName, placeName = it.placeName
+                    roadAddressName = it.roadAddressName,
+                    placeName = it.placeName
                 )
             )
         }
