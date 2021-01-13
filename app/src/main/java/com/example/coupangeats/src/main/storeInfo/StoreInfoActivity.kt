@@ -137,7 +137,6 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
         storeViewPagerAdapter.submitList(response.storePhoto)
         binding.storeName.text = response.storeInfo[0].storeName
 
-
         response.storeInfo.forEach {
             binding.storeName.text = it.storeName
             binding.storeStar.text = it.storeStar.toString()

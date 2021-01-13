@@ -10,6 +10,7 @@ import com.example.coupangeats.config.ApplicationClass.Companion.userName
 import com.example.coupangeats.config.ApplicationClass.Companion.userNumberOrEmail
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentMypageBinding
+import com.example.coupangeats.src.main.myPage.coupon.CouponActivity
 import com.example.coupangeats.src.main.myPage.models.NaverUserInfoResult
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(
@@ -28,6 +29,11 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         binding.userEmailOrNumber.text = userNumberOrEmail
 
         MyPageService(this).getUserInfo(NaverAccessToken)
+
+        binding.btnCouponView.setOnClickListener {
+            val intent = Intent(context, CouponActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onGetNaverUserInfoSuccess(response: NaverUserInfoResult) {
