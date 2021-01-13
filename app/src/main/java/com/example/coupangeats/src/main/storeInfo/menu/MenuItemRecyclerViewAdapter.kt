@@ -25,6 +25,7 @@ class MenuItemRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<M
         holder.itemView.setOnClickListener {
             val intent = Intent(context, MenuInfoActivity::class.java)
             intent.putExtra("menuIdx", menuItemList[position].menuIdx)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(context, intent, null)
         }
     }

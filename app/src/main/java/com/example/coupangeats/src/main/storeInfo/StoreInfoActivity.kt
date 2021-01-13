@@ -16,10 +16,7 @@ import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
 import com.example.coupangeats.src.main.storeInfo.viewpager.StoreViewPagerAdapter
 import com.example.coupangeats.src.main.storeInfo.menu.MenuCategoryRecyclerViewAdapter
-import com.example.coupangeats.src.main.storeInfo.models.CategoryMenu
-import com.example.coupangeats.src.main.storeInfo.models.HeartStoreResult
-import com.example.coupangeats.src.main.storeInfo.models.PhotoReview
-import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
+import com.example.coupangeats.src.main.storeInfo.models.*
 import com.example.coupangeats.src.main.storeInfo.review.ReviewDecoration
 import com.example.coupangeats.src.main.storeInfo.review.ReviewRecyclerViewAdapter
 import com.google.android.material.tabs.TabLayout
@@ -40,7 +37,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     private var photoReviewList = ArrayList<PhotoReview>()
     private lateinit var reviewRecyclerViewAdapter: ReviewRecyclerViewAdapter
 
-    private var storeIdx = 0
+    private lateinit var storeIdx: StoreIdx
 
     var tabName = ArrayList<String>()
     lateinit var tab: TabLayout.Tab
@@ -77,9 +74,8 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 //
 //        })
 
-        storeIdx = intent.getIntExtra("storeIdx", 0)
-
-        StoreService(this).getStoreInfo(storeIdx)
+        storeIdx = StoreIdx(intent.getIntExtra("storeIdx", 0))
+        StoreService(this).getStoreInfo(storeIdx.storeIdx)
 
         storeViewPagerAdapter = StoreViewPagerAdapter()
 
@@ -128,7 +124,10 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.btn_heart -> StoreService(this).postStoreHeart(storeIdx)
+            R.id.btn_heart -> {
+                StoreService(this).postStoreHeart(storeIdx)
+                Log.d(TAG, "StoreInfoActivity - onCreate() : 즐겨찾기에 추가할 인덱스 : $storeIdx")
+            }
         }
         return super.onOptionsItemSelected(item)
     }

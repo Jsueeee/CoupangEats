@@ -1,6 +1,7 @@
 package com.example.coupangeats.src.main.storeInfo
 
 import com.example.coupangeats.src.main.storeInfo.models.HeartStoreResult
+import com.example.coupangeats.src.main.storeInfo.models.StoreIdx
 import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,8 +15,8 @@ interface StoreRetrofitInterface {
         @Path("storeIdx") storeIdx: Int
     ): Call<StoreInfoResult>
 
-    @POST("/stores/hart")
+    @POST("/stores/heart")
     fun postStoreHeart(
-        @Body storeIdx: Int
+        @Body params: StoreIdx
     ): Call<HeartStoreResult>
 }

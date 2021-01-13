@@ -5,6 +5,7 @@ import com.example.coupangeats.config.ApplicationClass
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.src.main.home.HomeRetrofitInterface
 import com.example.coupangeats.src.main.storeInfo.models.HeartStoreResult
+import com.example.coupangeats.src.main.storeInfo.models.StoreIdx
 import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,7 +33,8 @@ class StoreService(val view: StoreActivityView) {
         })
     }
 
-    fun postStoreHeart(storeIdx: Int){
+    fun postStoreHeart(storeIdx: StoreIdx){
+        Log.d(TAG, "StoreService - postStoreHeart() : storeIdx : $storeIdx")
         val storeRetrofitInterface = ApplicationClass.sRetrofit.create(StoreRetrofitInterface::class.java)
         storeRetrofitInterface.postStoreHeart(storeIdx).enqueue(object :
             Callback<HeartStoreResult> {
