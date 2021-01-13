@@ -9,5 +9,7 @@ data class MainStore(
     val reviewCount: Int,
     val storeIdx: Int,
     val storeName: String,
-    val storeStar: Float
+    val storeStar: Float,
+    val isCheetah: String,
+    val isNewStore: String
 )

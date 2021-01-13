@@ -18,6 +18,7 @@ import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
 import com.example.coupangeats.src.main.address.map.MapActivity
 import com.example.coupangeats.src.main.address.mapSearch.MapSearchActivity
+import com.example.coupangeats.src.main.detailList.DetailFranchiseActivity
 import com.example.coupangeats.src.main.home.adapter.*
 import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
@@ -128,6 +129,11 @@ class HomeFragment :
                 context, RecyclerView.HORIZONTAL, false
             )
             addItemDecoration(RecyclerItemDecoration())
+        }
+
+        binding.btnArrowFranchise.setOnClickListener {
+            val intent = Intent(context, DetailFranchiseActivity::class.java)
+            startActivity(intent)
         }
     }
 
