@@ -38,7 +38,9 @@
         <activity android:name=".src.main.myPage.SettingActivity">
 
         </activity>
-        <activity android:name=".src.main.menuInfo.MenuInfoActivity"></activity>
+        <activity android:name=".src.main.menuInfo.MenuInfoActivity">
+
+        </activity>
         <activity android:name=".DetailActivity">
 
         </activity>

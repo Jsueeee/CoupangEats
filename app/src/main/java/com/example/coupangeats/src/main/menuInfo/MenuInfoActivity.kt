@@ -2,16 +2,19 @@ package com.example.coupangeats.src.main.menuInfo
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
+import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityMenuInfoBinding
 import com.example.coupangeats.src.main.menuInfo.models.MenuInfoResult
 import com.example.coupangeats.src.main.menuInfo.viewPager.MenuViewPagerAdapter
-import com.example.coupangeats.src.main.storeInfo.viewpager.StoreViewPagerAdapter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MenuInfoActivity: BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoBinding::inflate) , MenuActivityVeiw{
+const val TAG = "LOG"
+
+class MenuInfoActivity: BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoBinding::inflate) , MenuActivityView{
 
     private var menuIdx = 0
 
@@ -53,6 +56,30 @@ class MenuInfoActivity: BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoBi
 
     override fun onGetMenuInfoSuccess(response: MenuInfoResult) {
         menuViewPagerAdapter.submitList(response.menuPhoto as ArrayList<String>)
+
+        binding.menuName.text = response.menuInfo[0].menuName
+        binding.menuDetail.text = response.menuInfo[0].menuDetail
+        binding.menuPrice.text = "${response.menuInfo[0].menuPrice}원"
+
+        response.optCategoryMenu.forEach {
+            if(it.optCategoryIdx == 1){
+                binding.optionCategoryName1.text = it.optCategoryName
+                if(it.isMandatory == "Y")
+                    binding.mandatory1.visibility = View.VISIBLE
+            }else if(it.optCategoryIdx == 2){
+                binding.optionCategoryName2.text = it.optCategoryName
+                binding.optionCategoryLinear2.visibility = View.VISIBLE
+                if(it.isMandatory == "Y")
+                    binding.mandatory2.visibility = View.VISIBLE
+            }else if(it.optCategoryIdx == 3){
+                binding.optionCategoryName3.text = it.optCategoryName
+                binding.optionCategoryLinear3.visibility = View.VISIBLE
+                if(it.isMandatory == "Y")
+                    binding.mandatory3.visibility = View.VISIBLE
+            }else{
+                Log.d(TAG, "MenuInfoActivity - onGetMenuInfoSuccess() : 옵션 카테고리 확인")
+            }
+        }
 
     }
 

@@ -9,5 +9,9 @@ data class OptCategoryMenu(
     @SerializedName("optCategoryName")
     val optCategoryName: String,
     @SerializedName("optmenuList")
-    val optmenuList: List<Optmenu>
+    val optmenuList: List<Optmenu>,
+    @SerializedName("isMandatory")
+    val isMandatory: String,
+    @SerializedName("maxSelect")
+    val maxSelect: Int
 )

@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MenuService(val view: MenuActivityVeiw) {
+class MenuService(val view: MenuActivityView) {
     fun getMenuInfo(menuIdx: Int){
         val menuRetrofitInterface =
             ApplicationClass.sRetrofit.create(MenuRetrofitInterface::class.java)
