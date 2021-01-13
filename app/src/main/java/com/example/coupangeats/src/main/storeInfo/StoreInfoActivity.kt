@@ -48,8 +48,6 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     private var couponIdx = CouponIdx(0)
     private var couponCompleteTxt = ""
 
-    var is_download = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -122,18 +120,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             addItemDecoration(ReviewDecoration())
         }
 
-        //뷰 그릴 때 쿠폰 다운받았는지 확인
-        if(is_download == true){
-            binding.btnCouponDownload.background = ContextCompat.getDrawable(this, R.drawable.radius_gray)
-            binding.btnCouponDownloadLogo.setImageResource(R.drawable.ic_baseline_check_24)
-            binding.btnCouponText.text = couponCompleteTxt
-            if(couponCompleteTxt == "")
-                binding.btnCouponDownloadLogo.visibility = View.GONE
-            binding.btnCouponText.setTextColor(Color.parseColor("#9A9A9A"))
-        }
-
         binding.btnCouponDownload.setOnClickListener {
-            is_download = true
             it.background = ContextCompat.getDrawable(this, R.drawable.radius_gray)
             binding.btnCouponDownloadLogo.setImageResource(R.drawable.ic_baseline_check_24)
             binding.btnCouponText.text = couponCompleteTxt
@@ -143,8 +130,6 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
             StoreService(this).postStoreCoupon(storeIdx.storeIdx, couponIdx)
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -203,6 +188,15 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
         } else {
             couponIdx = CouponIdx(response.couponInfo.couponIdx)
             couponCompleteTxt = response.couponInfo.coupon
+            if(response.couponInfo.hasCoupon == "Y"){
+                binding.btnCouponDownload.background = ContextCompat.getDrawable(this, R.drawable.radius_gray)
+                binding.btnCouponDownloadLogo.setImageResource(R.drawable.ic_baseline_check_24)
+                binding.btnCouponText.text = couponCompleteTxt
+                if(couponCompleteTxt == "")
+                    binding.btnCouponDownloadLogo.visibility = View.GONE
+                binding.btnCouponText.setTextColor(Color.parseColor("#9A9A9A"))
+            }
+
         }
     }
 

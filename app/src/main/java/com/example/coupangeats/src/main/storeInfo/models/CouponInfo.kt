@@ -7,5 +7,7 @@ data class CouponInfo(
     @SerializedName("coupon")
     val coupon: String,
     @SerializedName("couponIdx")
-    val couponIdx: Int
+    val couponIdx: Int,
+    @SerializedName("hasCoupon")
+    val hasCoupon : String
 )
