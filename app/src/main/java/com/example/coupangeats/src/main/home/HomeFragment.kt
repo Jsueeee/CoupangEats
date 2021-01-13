@@ -13,12 +13,11 @@ import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
 import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
-import com.example.coupangeats.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
-import com.example.coupangeats.src.main.address.map.MapActivity
+import com.example.coupangeats.src.main.DetailListNewStore.DetailListNewStoreActivity
 import com.example.coupangeats.src.main.address.mapSearch.MapSearchActivity
-import com.example.coupangeats.src.main.detailList.DetailFranchiseActivity
+import com.example.coupangeats.src.main.detailListFranchise.DetailFranchiseActivity
 import com.example.coupangeats.src.main.home.adapter.*
 import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
@@ -133,6 +132,11 @@ class HomeFragment :
 
         binding.btnArrowFranchise.setOnClickListener {
             val intent = Intent(context, DetailFranchiseActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnArrowNew.setOnClickListener {
+            val intent = Intent(context, DetailListNewStoreActivity::class.java)
             startActivity(intent)
         }
     }

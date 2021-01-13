@@ -1,10 +1,10 @@
-package com.example.coupangeats.src.main.detailList
+package com.example.coupangeats.src.main.detailListFranchise
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemHomeFamousRestaurantBinding
-import com.example.coupangeats.src.main.detailList.models.Result
+import com.example.coupangeats.src.main.detailListFranchise.models.Result
 
 class DetailFranchiseRecyclerViewAdapter: RecyclerView.Adapter<DetailFranchiseRecyclerViewHolder>() {
 

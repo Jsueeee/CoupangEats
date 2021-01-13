@@ -1,9 +1,9 @@
-package com.example.coupangeats.src.main.detailList.models
+package com.example.coupangeats.src.main.DetailListNewStore.models
 
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailListResult(
+data class DetailListNewStoreResult(
     @SerializedName("code")
     val code: Int,
     @SerializedName("isSuccess")

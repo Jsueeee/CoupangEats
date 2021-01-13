@@ -1,6 +1,6 @@
-package com.example.coupangeats.src.main.detailList.retrofit
+package com.example.coupangeats.src.main.detailListFranchise.retrofit
 
-import com.example.coupangeats.src.main.detailList.models.DetailListResult
+import com.example.coupangeats.src.main.detailListFranchise.models.DetailListResult
 import retrofit2.Call
 import retrofit2.http.GET
 

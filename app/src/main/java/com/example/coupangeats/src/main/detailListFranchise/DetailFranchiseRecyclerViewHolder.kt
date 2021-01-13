@@ -1,4 +1,4 @@
-package com.example.coupangeats.src.main.detailList
+package com.example.coupangeats.src.main.detailListFranchise
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass
 import com.example.coupangeats.databinding.ItemHomeFamousRestaurantBinding
-import com.example.coupangeats.src.main.detailList.models.Result
+import com.example.coupangeats.src.main.detailListFranchise.models.Result
 
 class DetailFranchiseRecyclerViewHolder(val binding: ItemHomeFamousRestaurantBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -35,6 +35,10 @@ class DetailFranchiseRecyclerViewHolder(val binding: ItemHomeFamousRestaurantBin
 
         if(famRestaurantItem.coupon != null)
             binding.coupon.visibility = View.VISIBLE
+
+        if(famRestaurantItem.isnewStore == "Y"){
+            binding.isNewStore.visibility = View.VISIBLE
+        }
 
         storeIdx = famRestaurantItem.storeIdx
 

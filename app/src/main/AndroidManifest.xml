@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".src.main.detailList.DetailFranchiseActivity"/>
+        <activity android:name=".src.main.detailListFranchise.DetailFranchiseActivity"/>
+        <activity android:name=".src.main.DetailListNewStore.DetailListNewStoreActivity"/>
         <activity android:name=".src.main.storeInfo.StoreInfoActivity"
             android:theme="@style/NoStatusBar">
 

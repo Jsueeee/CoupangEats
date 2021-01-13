@@ -1,14 +1,14 @@
-package com.example.coupangeats.src.main.detailList
+package com.example.coupangeats.src.main.detailListFranchise
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityDetailFranchiseBinding
-import com.example.coupangeats.src.main.detailList.models.DetailListResult
-import com.example.coupangeats.src.main.detailList.models.Result
-import com.example.coupangeats.src.main.detailList.retrofit.DetailFranchiseService
-import com.example.coupangeats.src.main.detailList.retrofit.DetailFranchiseView
+import com.example.coupangeats.src.main.detailListFranchise.models.DetailListResult
+import com.example.coupangeats.src.main.detailListFranchise.models.Result
+import com.example.coupangeats.src.main.detailListFranchise.retrofit.DetailFranchiseService
+import com.example.coupangeats.src.main.detailListFranchise.retrofit.DetailFranchiseView
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
 
 class DetailFranchiseActivity: BaseActivity<ActivityDetailFranchiseBinding>(ActivityDetailFranchiseBinding::inflate), DetailFranchiseView{
