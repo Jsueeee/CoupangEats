@@ -1,16 +1,19 @@
 package com.example.coupangeats.src.main.storeInfo
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.R
 import com.example.coupangeats.config.BaseActivity
+import com.example.coupangeats.databinding.ActivityCouponBinding.inflate
 import com.example.coupangeats.databinding.ActivityStoreInfoBinding
 import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
@@ -41,6 +44,11 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
     var tabName = ArrayList<String>()
     lateinit var tab: TabLayout.Tab
+
+    private var couponIdx = CouponIdx(0)
+    private var couponCompleteTxt = ""
+
+    var is_download = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +122,29 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             addItemDecoration(ReviewDecoration())
         }
 
+        //뷰 그릴 때 쿠폰 다운받았는지 확인
+        if(is_download == true){
+            binding.btnCouponDownload.background = ContextCompat.getDrawable(this, R.drawable.radius_gray)
+            binding.btnCouponDownloadLogo.setImageResource(R.drawable.ic_baseline_check_24)
+            binding.btnCouponText.text = couponCompleteTxt
+            if(couponCompleteTxt == "")
+                binding.btnCouponDownloadLogo.visibility = View.GONE
+            binding.btnCouponText.setTextColor(Color.parseColor("#9A9A9A"))
+        }
+
+        binding.btnCouponDownload.setOnClickListener {
+            is_download = true
+            it.background = ContextCompat.getDrawable(this, R.drawable.radius_gray)
+            binding.btnCouponDownloadLogo.setImageResource(R.drawable.ic_baseline_check_24)
+            binding.btnCouponText.text = couponCompleteTxt
+            if(couponCompleteTxt == "")
+                binding.btnCouponDownloadLogo.visibility = View.GONE
+            binding.btnCouponText.setTextColor(Color.parseColor("#9A9A9A"))
+
+            StoreService(this).postStoreCoupon(storeIdx.storeIdx, couponIdx)
+        }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -123,7 +154,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.btn_heart -> {
                 StoreService(this).postStoreHeart(storeIdx)
                 Log.d(TAG, "StoreInfoActivity - onCreate() : 즐겨찾기에 추가할 인덱스 : $storeIdx")
@@ -144,12 +175,15 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             binding.deliveryFee.text = it.deliveryFee
             binding.minOrderCost.text = it.minOrderCost
             binding.reviewCount.text = "리뷰 ${it.reviewCount}개"
-            if(it.isCheetah == "N"){
+            if (it.isCheetah == "N") {
                 binding.isCheetah.visibility = View.INVISIBLE
             }
         }
 
-        Log.d(TAG, "StoreInfoActivity - onGetStoreInfoSuccess() : response.categoryMenu : ${response.categoryMenu}")
+        Log.d(
+            TAG,
+            "StoreInfoActivity - onGetStoreInfoSuccess() : response.categoryMenu : ${response.categoryMenu}"
+        )
 
         response.categoryMenu.forEach {
             categoryMenuList.add(it)
@@ -164,10 +198,15 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
         }
         reviewRecyclerViewAdapter.submitList(photoReviewList)
 
+        if (response.couponInfo == null) {
+            Log.d(TAG, "StoreInfoActivity - onGetStoreInfoSuccess() : 쿠폰정보 없음")
+        } else {
+            couponIdx = CouponIdx(response.couponInfo.couponIdx)
+            couponCompleteTxt = response.couponInfo.coupon
+        }
     }
 
     override fun onGetStoreInfoFailure(message: String) {
-
     }
 
     override fun onPostHeartSuccess(response: HeartStoreResult) {
@@ -176,5 +215,13 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
     override fun onPostHeartFailure(message: String) {
 
+    }
+
+    override fun onPostStoreCouponSuccess(response: CouponDownResult) {
+
+    }
+
+    override fun onPostStoreCouponFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

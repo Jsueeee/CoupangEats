@@ -1,8 +1,6 @@
 package com.example.coupangeats.src.main.storeInfo
 
-import com.example.coupangeats.src.main.storeInfo.models.HeartStoreResult
-import com.example.coupangeats.src.main.storeInfo.models.StoreIdx
-import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
+import com.example.coupangeats.src.main.storeInfo.models.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,4 +17,10 @@ interface StoreRetrofitInterface {
     fun postStoreHeart(
         @Body params: StoreIdx
     ): Call<HeartStoreResult>
+
+    @POST("/stores/{storeIdx}/coupon")
+    fun postStoreCoupon(
+        @Path("storeIdx") storeIdx: Int,
+        @Body params: CouponIdx
+    ): Call<CouponDownResult>
 }

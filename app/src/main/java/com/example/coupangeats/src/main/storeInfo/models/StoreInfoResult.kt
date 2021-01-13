@@ -9,7 +9,7 @@ data class StoreInfoResult(
     @SerializedName("code")
     val code: Int,
     @SerializedName("couponInfo")
-    val couponInfo: CouponInfo,
+    val couponInfo: CouponInfo?,
     @SerializedName("isSuccess")
     val isSuccess: Boolean,
     @SerializedName("message")

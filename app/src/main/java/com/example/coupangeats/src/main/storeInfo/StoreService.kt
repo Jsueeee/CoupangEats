@@ -4,14 +4,37 @@ import android.util.Log
 import com.example.coupangeats.config.ApplicationClass
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
 import com.example.coupangeats.src.main.home.HomeRetrofitInterface
-import com.example.coupangeats.src.main.storeInfo.models.HeartStoreResult
-import com.example.coupangeats.src.main.storeInfo.models.StoreIdx
-import com.example.coupangeats.src.main.storeInfo.models.StoreInfoResult
+import com.example.coupangeats.src.main.storeInfo.models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class StoreService(val view: StoreActivityView) {
+
+    fun postStoreCoupon(storeIdx: Int, couponIdx: CouponIdx){
+        val storeRetrofitInterface =
+            ApplicationClass.sRetrofit.create(StoreRetrofitInterface::class.java)
+        storeRetrofitInterface.postStoreCoupon(storeIdx, couponIdx).enqueue(object :
+            Callback<CouponDownResult> {
+            override fun onResponse(
+                call: Call<CouponDownResult>,
+                response: Response<CouponDownResult>
+            ) {
+                Log.d(
+                    TAG,
+                    "StoreService - onResponse() : 쿠폰 다운로드 요청 API 호출 성공 : ${response.body()}"
+                )
+                view.onPostStoreCouponSuccess(response.body() as CouponDownResult)
+            }
+
+            override fun onFailure(call: Call<CouponDownResult>, t: Throwable) {
+                Log.d(TAG, "StoreService - onFailure() : 쿠폰 다운로드 요청 API 호출 실패")
+                view.onPostStoreCouponFailure(t.message ?: "통신오류")
+            }
+
+        })
+    }
+
     fun getStoreInfo(storeIdx: Int){
         val storeRetrofitInterface =
             ApplicationClass.sRetrofit.create(StoreRetrofitInterface::class.java)
