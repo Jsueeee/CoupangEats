@@ -175,7 +175,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
             tabName.add(it.categoryName)
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(it.categoryName))
         }
-        menuCategoryRecyclerViewAdapter.submitList(categoryMenuList)
+        menuCategoryRecyclerViewAdapter.submitList(categoryMenuList, storeIdx.storeIdx)
 
 
         response.photoReview.forEach {

@@ -13,6 +13,7 @@ import com.example.coupangeats.src.main.storeInfo.models.Menu
 class MenuItemRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<MenuItemRecyclerViewHolder>(){
 
     private var menuItemList = ArrayList<Menu>()
+    private var storeIdx = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuItemRecyclerViewHolder {
         return MenuItemRecyclerViewHolder(
@@ -25,6 +26,7 @@ class MenuItemRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<M
         holder.itemView.setOnClickListener {
             val intent = Intent(context, MenuInfoActivity::class.java)
             intent.putExtra("menuIdx", menuItemList[position].menuIdx)
+            intent.putExtra("storeIdx", storeIdx)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(context, intent, null)
         }
@@ -34,8 +36,9 @@ class MenuItemRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<M
         return menuItemList.size
     }
 
-    fun submitList(menuItemList: ArrayList<Menu>){
+    fun submitList(menuItemList: ArrayList<Menu>, storeIdx: Int){
         this.menuItemList = menuItemList
+        this.storeIdx = storeIdx
         notifyDataSetChanged()
     }
 }

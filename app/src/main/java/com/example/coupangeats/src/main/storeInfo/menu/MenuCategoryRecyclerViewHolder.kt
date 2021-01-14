@@ -7,7 +7,7 @@ import com.example.coupangeats.databinding.MenuCategoryRecyclerviewBinding
 import com.example.coupangeats.src.main.storeInfo.models.CategoryMenu
 
 class MenuCategoryRecyclerViewHolder(val binding: MenuCategoryRecyclerviewBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bindWithView(categoryMenu: CategoryMenu){
+    fun bindWithView(categoryMenu: CategoryMenu, storeIdx: Int){
         binding.menuTitle.text = categoryMenu.categoryName//카테고리 타이틀
         binding.categoryDetail.text = categoryMenu.categoryDetail
 
@@ -18,6 +18,6 @@ class MenuCategoryRecyclerViewHolder(val binding: MenuCategoryRecyclerviewBindin
             setHasFixedSize(true)
         }
 
-        menuItemRecyclerViewAdapter.submitList(categoryMenu.menuList)
+        menuItemRecyclerViewAdapter.submitList(categoryMenu.menuList, storeIdx)
     }
 }
