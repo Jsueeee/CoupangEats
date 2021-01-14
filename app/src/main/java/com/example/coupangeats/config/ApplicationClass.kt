@@ -17,13 +17,8 @@ import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class ApplicationClass : Application() {
-    // val API_URL = "https://members.softsquared.com/"
 
-    // 테스트 서버 주소
     val API_URL = "https://prod.coupang-eats.shop/"
-
-    // 실 서버 주소
-    // val API_URL = "http://api.test.com/"
 
     val NAVER_MAP_API_URL = "https://naveropenapi.apigw.ntruss.com/"
     val KAKAO_MAP_API_URL = "https://dapi.kakao.com/v2/local/search/"

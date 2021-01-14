@@ -17,6 +17,7 @@ import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
 import com.example.coupangeats.src.main.DetailListNewStore.DetailListNewStoreActivity
 import com.example.coupangeats.src.main.address.mapSearch.MapSearchActivity
+import com.example.coupangeats.src.main.cartOrder.CartOrderActivity
 import com.example.coupangeats.src.main.detailListFranchise.DetailFranchiseActivity
 import com.example.coupangeats.src.main.home.adapter.*
 import com.example.coupangeats.src.main.home.decoration.CategoryDecoration
@@ -80,7 +81,7 @@ class HomeFragment :
             var currentPage = 0
             val handler = Handler()
             val Update = Runnable {
-                if (currentPage == 3) {
+                if (currentPage == 6) {
                     currentPage = 0
                 }
                 setCurrentItem(currentPage++, true)
@@ -137,6 +138,11 @@ class HomeFragment :
 
         binding.btnArrowNew.setOnClickListener {
             val intent = Intent(context, DetailListNewStoreActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnCartView.setOnClickListener {
+            val intent = Intent(context, CartOrderActivity::class.java)
             startActivity(intent)
         }
     }
