@@ -9,7 +9,7 @@ data class Optmenu(
     @SerializedName("menuOptName")
     val menuOptName: String,
     @SerializedName("menuOptPrice")
-    val menuOptPrice: Any?,
+    val menuOptPrice: String?,
     @SerializedName("optPrice")
     val optPrice: Any?
 )
