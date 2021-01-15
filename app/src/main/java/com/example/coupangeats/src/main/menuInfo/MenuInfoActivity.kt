@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.coupangeats.config.ApplicationClass.Companion.isOrder
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityMenuInfoBinding
 import com.example.coupangeats.src.main.menuInfo.models.CartRequest
@@ -92,10 +93,13 @@ class MenuInfoActivity : BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoB
 
         binding.btnCart.setOnClickListener {
             MenuService(this).postCartRequest(CartRequest(storeIdx, menuIdx, 1, optionList))
+            showCustomToast("카트에 메뉴가 담겼습니다.")
+            isOrder = true
             Log.d(
                 TAG,
                 "MenuInfoActivity - onCreate() : 카트 담기 api 호출에 필요한 데이터 $storeIdx / $menuIdx / $optionList"
             )
+            finish()
         }
 
     }

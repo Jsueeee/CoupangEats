@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityDetailFranchiseBinding
+import com.example.coupangeats.databinding.ActivityDetailNewStoreBinding
 import com.example.coupangeats.src.main.DetailListNewStore.models.DetailListNewStoreResult
 import com.example.coupangeats.src.main.DetailListNewStore.models.Result
 import com.example.coupangeats.src.main.DetailListNewStore.retrofit.DetailListNewStoreService
@@ -12,8 +13,8 @@ import com.example.coupangeats.src.main.DetailListNewStore.retrofit.DetailListNe
 import com.example.coupangeats.src.main.detailListFranchise.models.DetailListResult
 import com.example.coupangeats.src.main.home.decoration.MainStoreDecoration
 
-class DetailListNewStoreActivity : BaseActivity<ActivityDetailFranchiseBinding>(
-    ActivityDetailFranchiseBinding::inflate), DetailListNewStoreView{
+class DetailListNewStoreActivity : BaseActivity<ActivityDetailNewStoreBinding>(
+    ActivityDetailNewStoreBinding::inflate), DetailListNewStoreView{
 
     private var detailNewStoreItemList = ArrayList<Result>()
     private lateinit var detailListNewStoreRecyclerViewAdapter: DetailListNewStoreRecyclerViewAdapter

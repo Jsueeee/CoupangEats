@@ -28,6 +28,8 @@ class ApplicationClass : Application() {
     companion object {
         const val TAG = "LOG"
 
+        var isOrder = false
+
         lateinit var instance: ApplicationClass
             private set
 

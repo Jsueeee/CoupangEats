@@ -1,9 +1,12 @@
 package com.example.coupangeats.src.main.cartOrder
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.example.coupangeats.config.ApplicationClass.Companion.isOrder
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityCartOrderBinding
+import com.example.coupangeats.src.main.MainActivity
 import com.example.coupangeats.src.main.cartOrder.models.CartOrderResponse
 import com.example.coupangeats.src.main.cartOrder.models.order.BootPayResult
 import com.example.coupangeats.src.main.cartOrder.models.order.OrderRequest
@@ -15,6 +18,7 @@ import kr.co.bootpay.enums.PG
 import kr.co.bootpay.enums.UX
 import kr.co.bootpay.model.BootExtra
 import kr.co.bootpay.model.BootUser
+import org.json.JSONObject
 
 const val TAG = "LOG"
 
@@ -69,12 +73,20 @@ class CartOrderActivity : BaseActivity<ActivityCartOrderBinding>(ActivityCartOrd
                 Log.d("confirm", message);
             }
             .onDone { message ->
-                // message as BootPayResult
-                // receipt_id = message.receiptId
-                Log.d("done / receipt_id = ", message)
-//                Log.d(TAG, "CartOrderActivity - goBootpayRequest() : receipt_id : $receipt_id")
-//
-//                CartOrderService(this).postOrderRequest(OrderRequest("", "", 0, receipt_id))
+
+                var jsonObject = JSONObject(message)
+                var receipt = jsonObject.getString("receipt_id")
+
+                Log.d(TAG,  "message -> $message")
+                Log.d(TAG, "CartOrderActivity - goBootpayRequest() : receipt_id : $receipt")
+
+                CartOrderService(this).postOrderRequest(OrderRequest("", "", 0, receipt))
+                showCustomToast("주문이 완료되었습니다.")
+
+                isOrder = false
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
             .onReady { message ->
                 Log.d("ready", message)
@@ -126,7 +138,7 @@ class CartOrderActivity : BaseActivity<ActivityCartOrderBinding>(ActivityCartOrd
 
         response.cartList.forEach {
             binding.menuName.text = it.menuName
-            var temp  = ""
+            var temp = ""
             for (i in it.option) {
                 temp += i
             }

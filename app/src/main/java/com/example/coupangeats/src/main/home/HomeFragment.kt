@@ -13,6 +13,7 @@ import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
 import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.TAG
+import com.example.coupangeats.config.ApplicationClass.Companion.isOrder
 import com.example.coupangeats.config.BaseFragment
 import com.example.coupangeats.databinding.FragmentHomeBinding
 import com.example.coupangeats.src.main.DetailListNewStore.DetailListNewStoreActivity
@@ -56,6 +57,11 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "HomeFragment - onViewCreated() : ")
 
+        if(isOrder == false){
+            binding.btnCartView.visibility = View.GONE
+        }else{
+            binding.btnCartView.visibility = View.VISIBLE
+        }
         if (AccessTokenType == "kakao") {
             HomeService(this).tryPostSignUpKaKao(PostSignUpRequest(KaKaoAccessToken))
             Log.d(TAG, "HomeFragment - onViewCreated() : 카카오 액세스 토큰 전달 완료 $KaKaoAccessToken")
@@ -231,7 +237,6 @@ class HomeFragment :
     }
 
     override fun onFamRestaurantItemClicked(storeIdx: Int) {
-        showCustomToast("아이템 클릭 $storeIdx")
         val intent = Intent(context, StoreInfoActivity::class.java)
         intent.putExtra("storeIdx", storeIdx)
         startActivity(intent)

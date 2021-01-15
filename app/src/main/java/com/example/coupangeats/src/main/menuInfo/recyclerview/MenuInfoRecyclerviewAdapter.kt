@@ -18,6 +18,10 @@ class MenuInfoRecyclerviewAdapter: RecyclerView.Adapter<MenuInfoRecyclerViewHold
 
     override fun onBindViewHolder(holder: MenuInfoRecyclerViewHolder, position: Int) {
         holder.bindWithView(menuInfoList[position])
+
+        holder.itemView.setOnClickListener {
+            holder.click()
+        }
     }
 
     override fun getItemCount(): Int {

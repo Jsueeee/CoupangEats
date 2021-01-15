@@ -38,6 +38,7 @@ class DetailFranchiseRecyclerViewHolder(val binding: ItemHomeFamousRestaurantBin
 
         if(famRestaurantItem.isnewStore == "Y"){
             binding.isNewStore.visibility = View.VISIBLE
+            binding.isCheetah.visibility = View.GONE
         }
 
         storeIdx = famRestaurantItem.storeIdx

@@ -22,7 +22,6 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         latitude = intent.getDoubleExtra("latitude", 0.0)
         longitude = intent.getDoubleExtra("longitude", 0.0)
         address = intent.getStringExtra("address").toString()
@@ -41,6 +40,7 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
         binding.btnMap.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.btnAddressComplete.setOnClickListener {
