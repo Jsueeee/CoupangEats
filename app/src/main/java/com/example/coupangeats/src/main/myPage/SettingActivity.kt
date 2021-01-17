@@ -19,15 +19,15 @@ class SettingActivity: BaseActivity<ActivitySettingBinding>(ActivitySettingBindi
         binding.btnLogout.setOnClickListener {
             // 네이버 로그아웃
             OauthLoginModule.logout(this)
-            Log.d(TAG, "SettingActivity - onCreate() : 로그아웃")
+            Log.d(TAG, "SettingActivity - onCreate() : 네이버 로그아웃")
 
             // 카카오 로그아웃
             UserApiClient.instance.logout { error ->
                 if (error != null) {
-                    Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
+                    Log.e(TAG, "카카오 로그아웃 실패. SDK에서 토큰 삭제됨", error)
                 }
                 else {
-                    Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
+                    Log.i(TAG, "카카오 로그아웃 성공. SDK에서 토큰 삭제됨")
                 }
             }
         }
