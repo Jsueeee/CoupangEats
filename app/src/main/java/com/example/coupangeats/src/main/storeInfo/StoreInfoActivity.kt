@@ -57,6 +57,8 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     private var couponIdx = CouponIdx(0)
     private var couponCompleteTxt = ""
 
+    private var isBookMark = false
+
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +96,12 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
         binding.btnBookmark.setOnClickListener {
             StoreService(this).postStoreHeart(storeIdx)
-            binding.btnBookmark.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+            if(isBookMark == false){
+                binding.btnBookmark.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+            }else{
+                binding.btnBookmark.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
+            }
+
         }
 
         storeViewPagerAdapter = StoreViewPagerAdapter()
@@ -241,7 +248,20 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
     }
 
     override fun onGetBookMarkListSuccess(response: MyBookMarkList) {
+        if(response.heartStore == null){
+            Log.d(TAG, "StoreInfoActivity - onGetBookMarkListSuccess() : 즐겨찾기 목록이 없습니다.")
+        }
+        else {
+            response.heartStore.forEach {
+                if (it.storeIdx == storeIdx.storeIdx) {
+                    isBookMark = true
+                }
+            }
+        }
 
+        if(isBookMark == true){
+            binding.btnBookmark.setImageDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+        }
     }
 
     override fun onGetBookMarkListFailure(message: String) {
