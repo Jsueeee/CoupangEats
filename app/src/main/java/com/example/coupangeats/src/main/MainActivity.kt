@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass
+import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityMainBinding
 import com.example.coupangeats.src.main.bookMark.BookMarkFragment
@@ -21,7 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         supportFragmentManager.beginTransaction().replace(R.id.frame_main, HomeFragment())
             .commitAllowingStateLoss()
 
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener (
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.menu_main_bottom_home -> {
@@ -49,12 +50,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.menu_main_bottom_mypage -> {
-                        val signInDialog = SignInDialog(this, this)
-                        signInDialog.show()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.frame_main, MyPageFragment())
-                            .commitAllowingStateLoss()
-
+                        if (AccessTokenType == "") {
+                            val signInDialog = SignInDialog(this, this)
+                            signInDialog.show()
+                        } else {
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.frame_main, MyPageFragment())
+                                .commitAllowingStateLoss()
+                        }
 //                        if(ApplicationClass.X_ACCESS_TOKEN == "X-ACCESS-TOKEN"){
 //                            val signInDialog = SignInDialog(this, this)
 //                            signInDialog.show()

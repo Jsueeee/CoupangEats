@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.coupangeats.R
+import com.example.coupangeats.config.ApplicationClass.Companion.AccessTokenType
 import com.example.coupangeats.config.ApplicationClass.Companion.KaKaoAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.NaverAccessToken
 import com.example.coupangeats.config.ApplicationClass.Companion.userName
@@ -24,9 +25,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
             val intent = Intent(context, SettingActivity::class.java)
             startActivity(intent)
         }
-
-        binding.userName.text = userName
-        binding.userEmailOrNumber.text = userNumberOrEmail
+        if(AccessTokenType == "kakao"){
+            binding.userName.text = userName
+            binding.userEmailOrNumber.text = userNumberOrEmail
+        }
 
         MyPageService(this).getUserInfo(NaverAccessToken)
 
@@ -37,10 +39,11 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     override fun onGetNaverUserInfoSuccess(response: NaverUserInfoResult) {
-        KaKaoAccessToken = ""
         val phoneNumberEndString = response.response.mobile.substring(9)
-        binding.userName.text = response.response.name
-        binding.userEmailOrNumber.text = "010-****-$phoneNumberEndString"
+        if(AccessTokenType == "naver"){
+            binding.userName.text = response.response.name
+            binding.userEmailOrNumber.text = "010-****-$phoneNumberEndString"
+        }
     }
 
     override fun onGetNaverUserInfoFailure(message: String) {

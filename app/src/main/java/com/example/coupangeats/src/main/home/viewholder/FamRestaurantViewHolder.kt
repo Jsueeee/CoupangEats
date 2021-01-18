@@ -47,6 +47,8 @@ class FamRestaurantViewHolder(
         if(famRestaurantItem.coupon != null)
             binding.coupon.visibility = View.VISIBLE
 
+        binding.deliveryTime.text = famRestaurantItem.deliveryTime
+
     }
 
     override fun onClick(v: View?) {

@@ -37,7 +37,6 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
     private lateinit var binding: SignInDialogBinding
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,6 +63,9 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
                 KaKaoAccessToken = token.accessToken
                 AccessTokenType = "kakao"
+                // 위치 중요 *콜백에서*
+                // dismiss() 사용시 토큰 정보 보기에서 token null
+                hide()
             }
         }
 
@@ -171,6 +173,7 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
                             TAG,
                             "SignInDialog - run() : / errorCode: $errorCode errorDesc: $errorDesc"
                         )
+                        dismiss()
                     }
                 }
             }
@@ -179,6 +182,7 @@ class SignInDialog(context: Context, private var activity: Activity) : Dialog(co
         }
 
         Log.d(TAG, "SignInDialog - onCreate() : naverAccessToken / $NaverAccessToken")
+
     }
 
     override fun dismiss() {
