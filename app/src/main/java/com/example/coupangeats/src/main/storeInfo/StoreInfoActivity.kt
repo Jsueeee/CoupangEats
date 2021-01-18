@@ -183,6 +183,7 @@ class StoreInfoActivity : BaseActivity<ActivityStoreInfoBinding>(ActivityStoreIn
 
         response.storeInfo.forEach {
             binding.storeName.text = it.storeName
+            binding.toolbarTitle.text = it.storeName
             binding.storeStar.text = it.storeStar.toString()
             binding.deliveryTime.text = it.deliveryTime
             binding.deliveryFee.text = it.deliveryFee
