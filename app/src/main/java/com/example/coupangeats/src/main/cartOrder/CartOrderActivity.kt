@@ -3,6 +3,8 @@ package com.example.coupangeats.src.main.cartOrder
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import com.example.coupangeats.R
 import com.example.coupangeats.config.ApplicationClass.Companion.isOrder
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityCartOrderBinding
@@ -10,6 +12,7 @@ import com.example.coupangeats.src.main.MainActivity
 import com.example.coupangeats.src.main.cartOrder.models.CartOrderResponse
 import com.example.coupangeats.src.main.cartOrder.models.order.BootPayResult
 import com.example.coupangeats.src.main.cartOrder.models.order.OrderRequest
+import com.example.coupangeats.src.main.order.OrderFragment
 import com.google.gson.JsonObject
 import kr.co.bootpay.Bootpay
 import kr.co.bootpay.BootpayAnalytics
@@ -84,9 +87,19 @@ class CartOrderActivity : BaseActivity<ActivityCartOrderBinding>(ActivityCartOrd
                 showCustomToast("주문이 완료되었습니다.")
 
                 isOrder = false
+
+//                val bundle = Bundle()
+//                bundle.putString("receiptId", receipt)
+//                OrderFragment().arguments = bundle
+//                supportFragmentManager.beginTransaction().replace(R.id.frame_main, OrderFragment()).commit()
+//                finish()
+
                 val intent = Intent(this, MainActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
                 finish()
+
+
             }
             .onReady { message ->
                 Log.d("ready", message)

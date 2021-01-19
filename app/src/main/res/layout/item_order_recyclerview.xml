@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/radius_dark_gray">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -38,7 +39,7 @@
         android:layout_marginTop="16dp"
         android:text="주문요청"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_time" />
 
@@ -58,10 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="메뉴이름"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_state_name" />
 
@@ -69,10 +70,10 @@
         android:id="@+id/appCompatTextView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="합계: "
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/menu_name"
         app:layout_constraintTop_toBottomOf="@+id/menu_name" />
 
@@ -83,7 +84,7 @@
         android:layout_marginStart="2dp"
         android:text="000원"
         android:textColor="@color/black"
-        android:textSize="17dp"
+        android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView6"
         app:layout_constraintStart_toEndOf="@+id/appCompatTextView6"
@@ -91,17 +92,18 @@
 
 
     <TextView
-        android:id="@+id/btn_blue"
+        android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
-        android:background="#01AFFF"
+        android:background="@drawable/radius_line"
+        android:backgroundTint="#01AFFF"
         android:gravity="center"
         android:text="취소하기"
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,14 +117,13 @@
         android:gravity="center"
         android:text="영수증보기"
         android:textColor="#595959"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:layout_marginBottom="2dp"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_blue" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
