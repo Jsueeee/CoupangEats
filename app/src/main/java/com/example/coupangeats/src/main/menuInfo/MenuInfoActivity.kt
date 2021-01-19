@@ -1,5 +1,6 @@
 package com.example.coupangeats.src.main.menuInfo
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -10,6 +11,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.coupangeats.config.ApplicationClass.Companion.isOrder
 import com.example.coupangeats.config.BaseActivity
 import com.example.coupangeats.databinding.ActivityMenuInfoBinding
+import com.example.coupangeats.src.main.MainActivity
+import com.example.coupangeats.src.main.address.map.MapActivity
 import com.example.coupangeats.src.main.menuInfo.models.CartRequest
 import com.example.coupangeats.src.main.menuInfo.models.CartResponse
 import com.example.coupangeats.src.main.menuInfo.models.MenuInfoResult
@@ -26,7 +29,7 @@ class MenuInfoActivity : BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoB
 
     private var menuIdx = 0
     private var storeIdx = 0
-    private var optionList = ArrayList<Int>()
+    var optionList = ArrayList<Int>()
 
     private lateinit var menuViewPagerAdapter: MenuViewPagerAdapter
     private lateinit var timer: Timer
@@ -46,19 +49,19 @@ class MenuInfoActivity : BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoB
 
         MenuService(this).getMenuInfo(menuIdx)
 
-        menuInfoRecyclerviewAdapter = MenuInfoRecyclerviewAdapter()
+        menuInfoRecyclerviewAdapter = MenuInfoRecyclerviewAdapter(this)
         binding.recyclerViewOptionCategoryMenu1.apply {
             adapter = menuInfoRecyclerviewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
-        menuInfoRecyclerviewAdapter2 = MenuInfoRecyclerviewAdapter()
+        menuInfoRecyclerviewAdapter2 = MenuInfoRecyclerviewAdapter(this)
         binding.recyclerViewOptionCategoryMenu2.apply {
             adapter = menuInfoRecyclerviewAdapter2
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
-        menuInfoRecyclerviewAdapter3 = MenuInfoRecyclerviewAdapter()
+        menuInfoRecyclerviewAdapter3 = MenuInfoRecyclerviewAdapter(this)
         binding.recyclerViewOptionCategoryMenu3.apply {
             adapter = menuInfoRecyclerviewAdapter3
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -87,9 +90,10 @@ class MenuInfoActivity : BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoB
         }
 
 
-        optionList.add(1)
-        optionList.add(5)
-        optionList.add(7)
+
+//        optionList.add(1)
+//        optionList.add(5)
+//        optionList.add(7)
 
         binding.btnCart.setOnClickListener {
             MenuService(this).postCartRequest(CartRequest(storeIdx, menuIdx, 1, optionList))
@@ -99,6 +103,9 @@ class MenuInfoActivity : BaseActivity<ActivityMenuInfoBinding>(ActivityMenuInfoB
                 TAG,
                 "MenuInfoActivity - onCreate() : 카트 담기 api 호출에 필요한 데이터 $storeIdx / $menuIdx / $optionList"
             )
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
             finish()
         }
 

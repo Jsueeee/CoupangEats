@@ -88,12 +88,6 @@ class CartOrderActivity : BaseActivity<ActivityCartOrderBinding>(ActivityCartOrd
 
                 isOrder = false
 
-//                val bundle = Bundle()
-//                bundle.putString("receiptId", receipt)
-//                OrderFragment().arguments = bundle
-//                supportFragmentManager.beginTransaction().replace(R.id.frame_main, OrderFragment()).commit()
-//                finish()
-
                 val intent = Intent(this, MainActivity::class.java)
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)

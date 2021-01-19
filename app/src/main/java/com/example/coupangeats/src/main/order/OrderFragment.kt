@@ -35,8 +35,8 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>(
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("과거 준비 내역"))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("준비중"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("과거 준비 내역"))
     }
 
     override fun onGetOrderListSuccess(response: OrderListResponse) {

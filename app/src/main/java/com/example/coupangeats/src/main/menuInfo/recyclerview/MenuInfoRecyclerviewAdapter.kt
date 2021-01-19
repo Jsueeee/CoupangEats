@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coupangeats.databinding.ItemMenuInfoRecyclerviewBinding
+import com.example.coupangeats.src.main.menuInfo.MenuInfoActivity
 import com.example.coupangeats.src.main.menuInfo.models.Optmenu
 
-class MenuInfoRecyclerviewAdapter: RecyclerView.Adapter<MenuInfoRecyclerViewHolder>() {
+class MenuInfoRecyclerviewAdapter(val activity: MenuInfoActivity): RecyclerView.Adapter<MenuInfoRecyclerViewHolder>() {
 
     private var menuInfoList = ArrayList<Optmenu>()
 
@@ -21,6 +22,7 @@ class MenuInfoRecyclerviewAdapter: RecyclerView.Adapter<MenuInfoRecyclerViewHold
 
         holder.itemView.setOnClickListener {
             holder.click()
+            activity.optionList.add(menuInfoList[position].menuOptIdx)
         }
     }
 
