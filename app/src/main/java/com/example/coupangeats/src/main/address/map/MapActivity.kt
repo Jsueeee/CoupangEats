@@ -59,6 +59,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>(ActivityMapBinding::inflate
             intent.putExtra("address", address)
             intent.putExtra("buildingName", buildingName)
             startActivity(intent)
+            finish()
         }
 
     }

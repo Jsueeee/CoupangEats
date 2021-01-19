@@ -14,7 +14,7 @@ class OrderRecyclerViewHolder(val binding: ItemOrderRecyclerviewBinding): Recycl
         binding.orderStateName.text = orderResult.orderStateName
         binding.orderPrice.text = orderResult.orderPrice
         Glide.with(ApplicationClass.instance).load(orderResult.storePhoto)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.storePhoto)
+            .into(binding.storePhoto)
         orderResult.menuList.forEach {
             it.forEach {
                 binding.menuName.text = it.menuName

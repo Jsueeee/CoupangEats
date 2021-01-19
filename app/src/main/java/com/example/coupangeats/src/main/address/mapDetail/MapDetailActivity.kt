@@ -39,6 +39,7 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
 
         binding.btnMap.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }
@@ -49,7 +50,8 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
             // 서버에 전송
 
             //개발 단계 사용 x
-            val addressInfoRequest = AddressInfoRequest(latitude, longitude, address, buildingName, addressDetail)
+            val addressInfoRequest =
+                AddressInfoRequest(latitude, longitude, address, buildingName, addressDetail)
 
 //            // 개발 단계 임시 주소 사용
 //            val addressInfoRequest =
@@ -66,6 +68,7 @@ class MapDetailActivity : BaseActivity<ActivityMapDetailBinding>(ActivityMapDeta
             // "배달주소가 변경되었습니다" 다이얼로그
 
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }

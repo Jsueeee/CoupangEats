@@ -11,6 +11,6 @@ class StoreViewHolder(val binding: ItemStoreViewpagerBinding) :
 
     fun bindWithView(storePhoto: String) {
         Glide.with(ApplicationClass.instance).load(storePhoto)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemStoreViewpager)
+            .into(binding.itemStoreViewpager)
     }
 }

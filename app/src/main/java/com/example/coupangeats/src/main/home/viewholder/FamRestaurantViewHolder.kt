@@ -27,11 +27,11 @@ class FamRestaurantViewHolder(
 
     fun bindWithView(famRestaurantItem: MainStore) {
         Glide.with(ApplicationClass.instance).load(famRestaurantItem.img[0])
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMainStoreImage1)
+            .into(binding.itemMainStoreImage1)
         Glide.with(ApplicationClass.instance).load(famRestaurantItem.img[1])
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMainStoreImage2)
+            .into(binding.itemMainStoreImage2)
         Glide.with(ApplicationClass.instance).load(famRestaurantItem.img[2])
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMainStoreImage3)
+            .into(binding.itemMainStoreImage3)
         binding.famousRestaurantTitle.text = famRestaurantItem.storeName
         binding.itemMainStoreStoreStar.text = famRestaurantItem.storeStar.toString()
         binding.itemMainStoreReviewCount.text = "(${famRestaurantItem.reviewCount})"
@@ -40,11 +40,11 @@ class FamRestaurantViewHolder(
 
         storeIdx = famRestaurantItem.storeIdx
 
-        if(famRestaurantItem.isCheetah == "Y"){
+        if (famRestaurantItem.isCheetah == "Y") {
             binding.isCheetah.visibility = View.VISIBLE
         }
 
-        if(famRestaurantItem.coupon != null)
+        if (famRestaurantItem.coupon != null)
             binding.coupon.visibility = View.VISIBLE
 
         binding.deliveryTime.text = famRestaurantItem.deliveryTime

@@ -11,7 +11,7 @@ class OpenStoreViewHolder(val binding: ItemHomeOpenstoreBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindWithView(openStoreItem: OpenStore) {
         Glide.with(ApplicationClass.instance).load(openStoreItem.storePhoto)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemOpenStoreImage)
+            .into(binding.itemOpenStoreImage)
         binding.itemOpenStoreTitle.text = openStoreItem.storeName
         binding.itemOpenStoreDistance.text = openStoreItem.distance
         binding.itemOpenStoreDeliveryFee.text = openStoreItem.deliveryFee

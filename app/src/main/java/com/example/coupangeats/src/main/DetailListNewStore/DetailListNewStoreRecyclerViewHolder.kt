@@ -15,11 +15,11 @@ RecyclerView.ViewHolder(binding.root) {
 
     fun bindWithView(famRestaurantItem: Result) {
         Glide.with(ApplicationClass.instance).load(famRestaurantItem.img[0])
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMainStoreImage1)
+            .into(binding.itemMainStoreImage1)
         Glide.with(ApplicationClass.instance).load(famRestaurantItem.img[1])
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMainStoreImage2)
+            .into(binding.itemMainStoreImage2)
         Glide.with(ApplicationClass.instance).load(famRestaurantItem.img[2])
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMainStoreImage3)
+            .into(binding.itemMainStoreImage3)
         binding.famousRestaurantTitle.text = famRestaurantItem.storeName
         if(famRestaurantItem.storeStar == null) binding.itemMainStoreStoreStar.text = "0"
         else binding.itemMainStoreStoreStar.text = famRestaurantItem.storeStar.toString()

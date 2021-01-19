@@ -10,6 +10,6 @@ class MenuViewHolder(val binding: ItemMenuViewpagerBinding):
 RecyclerView.ViewHolder(binding.root){
     fun bindWithView(menuPhoto: String){
         Glide.with(ApplicationClass.instance).load(menuPhoto)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemMenuViewpager)
+            .into(binding.itemMenuViewpager)
     }
 }

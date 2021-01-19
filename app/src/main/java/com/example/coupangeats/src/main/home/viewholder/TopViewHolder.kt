@@ -13,6 +13,6 @@ class TopViewHolder(val binding: ItemHomeTopViewpagerBinding): RecyclerView.View
 
     fun bindWithView(promotion: Promotion){
         Glide.with(ApplicationClass.instance).load(promotion.promotionPhoto)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemHomeTopViewpagerImage)
+            .into(binding.itemHomeTopViewpagerImage)
     }
 }

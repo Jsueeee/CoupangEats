@@ -12,7 +12,7 @@ class FranchiseViewHolder(val binding: ItemHomeFranchiseBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindWithView(franchiseItem: Franchise) {
         Glide.with(ApplicationClass.instance).load(franchiseItem.storePhoto)
-            .placeholder(R.drawable.ic_launcher_background).into(binding.itemFranchiseImage)
+            .into(binding.itemFranchiseImage)
         binding.itemFranchiseTitle.text = franchiseItem.storeName
         binding.itemFranchiseStoreStar.text = franchiseItem.storeStar.toString()
         binding.itemFranchiseReviewCount.text = "(${franchiseItem.reviewCount})"
